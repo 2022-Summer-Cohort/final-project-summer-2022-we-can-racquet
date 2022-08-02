@@ -52,7 +52,7 @@ function makeLoginPageFromJSON(players) {
             })
             .then(res => res.json())
             .then(newPlayer => {
-                  makeHomePageFromSelectedPlayer(newPlayer);
+                  makeHomeView();
             })
 
       })
@@ -62,6 +62,12 @@ function makeLoginPageFromJSON(players) {
 function makeHomePageFromSelectedPlayer(player){
       container.innerHTML = header();
       container.innerHTML += home(player);
+
+      const backButton = document.querySelector(".home-navigation");
+      backButton.addEventListener("click", () => {
+        makeHomeView();
+      });
+
 
 }
 makeHomeView();

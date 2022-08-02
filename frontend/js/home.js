@@ -1,13 +1,12 @@
-export default function home(users) {
+export default function home(player) {
     return `
-    ${users.map(user =>{
-        return `
-        <div class = "user">
-        <p class = "name"> ${user.name}</p>
-        <p class = "league"> ${user.league}</p>
-        <input type="hidden" class="id_field" value="${user.id}">  
+        <div class = "player">
+        <p class = "name"> ${player.name}</p>
+        <p class = "league"> ${player.league}</p>
+        <p class = "avatarUrl"> ${player.avatarUrl}</p>
+        <p class = "email"> ${player.email}</p>
+        <p class = "phone"> ${player.phoneNumber}</p>
+        <input type="hidden" class="id_field" value="${player.id}">  
         </div>
         `
-    })}
-    `
-}
+    }

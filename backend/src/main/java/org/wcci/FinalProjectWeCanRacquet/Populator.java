@@ -2,23 +2,28 @@ package org.wcci.FinalProjectWeCanRacquet;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import org.wcci.FinalProjectWeCanRacquet.models.User;
-import org.wcci.FinalProjectWeCanRacquet.repos.UserRepository;
+
+import org.wcci.FinalProjectWeCanRacquet.models.Player;
+import org.wcci.FinalProjectWeCanRacquet.repos.PlayerRepository;
 
 @Component
 public class Populator implements CommandLineRunner {
 
-    private UserRepository userRepo;
+    private PlayerRepository playerRepo;
 
-    public Populator(UserRepository userRepo) {
-        this.userRepo = userRepo;
+    public Populator(PlayerRepository playerRepo) {
+        this.playerRepo = playerRepo;
     }
 
     @Override
     public void run(String... args) throws Exception {
 
-        User player1 = new User("Ed","3.0","https://img.freepik.com/premium-vector/man-character-avatar-icon-tennis-sport_51635-2515.jpg",
+        Player player1 = new Player("Ed","3.0","https://img.freepik.com/premium-vector/man-character-avatar-icon-tennis-sport_51635-2515.jpg",
                 "ed1@gmail.com","6145524515");
-        userRepo.save(player1);
+        playerRepo.save(player1);
+
+        Player player2 = new Player("Anish","3.0","https://img.freepik.com/premium-vector/man-character-avatar-icon-tennis-sport_51635-2515.jpg",
+                "ed1@gmail.com","6145524515");
+        playerRepo.save(player2);
     }
 }

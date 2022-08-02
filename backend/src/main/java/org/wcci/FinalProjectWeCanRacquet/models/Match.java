@@ -10,6 +10,6 @@ public class Match {
     @Id
     @GeneratedValue
     private Long id;
-    private User winner;
-    private User loser;
+//    private User winner;
+//    private User loser;
 }

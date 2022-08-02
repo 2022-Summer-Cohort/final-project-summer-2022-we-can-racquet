@@ -63,5 +63,10 @@ function makeHomePageFromSelectedPlayer(player){
       container.innerHTML = header();
       container.innerHTML += home(player);
 
+      const homeBtn = container.querySelector(".home-navigation");
+      homeBtn.addEventListener ("click", () => {
+            makeHomeView();
+      })
+
 }
 makeHomeView();

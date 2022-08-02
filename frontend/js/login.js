@@ -1,11 +1,11 @@
-export default function login(users) {
+export default function login(players) {
     return `
 
         <select class="form-select playerNameSelected" required>
         <option selected disabled>Player name</option>
-            ${users.map(user =>{
+            ${players.map(player =>{
                 return `
-                    <option value=${user.id}>${user.name}</option>
+                    <option value=${player.id}>${player.name}</option>
                 `
             })}
         </select>

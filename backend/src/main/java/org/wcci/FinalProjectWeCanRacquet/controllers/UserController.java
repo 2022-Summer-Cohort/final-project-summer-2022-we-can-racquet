@@ -18,7 +18,12 @@ public class UserController {
     }
 
     @GetMapping("/api/user")
-    public User showUser(@PathVariable Long id) {
+    public Iterable<User> showAllUser() {
+        return userRepo.findAll();
+    }
+
+    @GetMapping("/api/user/id")
+    public User getUserById(@PathVariable Long id){
         return userRepo.findById(id).get();
     }
 }

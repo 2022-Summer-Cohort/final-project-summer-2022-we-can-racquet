@@ -34,19 +34,23 @@ public class Populator implements CommandLineRunner {
 
         Player player1 = new Player("Ed","3.0","https://img.freepik.com/premium-vector/man-character-avatar-icon-tennis-sport_51635-2515.jpg",
                 "ed1@gmail.com","6145524515");
-        playerRepo.save(player1);
-
         Player player2 = new Player("Anish","3.0","https://img.freepik.com/premium-vector/man-character-avatar-icon-tennis-sport_51635-2515.jpg",
                 "ed1@gmail.com","6145524515");
+        playerRepo.save(player1);
         playerRepo.save(player2);
-
 
         Match match1 = new Match();
         matchRepo.save(match1);
 
-        SetsScore set1 = new SetsScore(6,0,match1);
-        SetsScore set2 = new SetsScore(3,6,match1);
-        SetsScore set3 = new SetsScore(6,4,match1);
+        SetsScore set1 = new SetsScore(6,0, match1);
+        SetsScore set2 = new SetsScore(3,6, match1);
+        SetsScore set3 = new SetsScore(6,4, match1);
+        setsRepo.save(set1);
+        setsRepo.save(set2);
+        setsRepo.save(set3);
+
+        Record record1 = new Record(player1, player2, match1);
+        recordRepo.save(record1);
 
         Player player3 = new Player("name3", "3.0", "url", "email", "phoneNumber");
         Player player4 = new Player("name4", "3.0", "url", "email", "phoneNumber");
@@ -61,12 +65,6 @@ public class Populator implements CommandLineRunner {
         playerRepo.save(player7);
         playerRepo.save(player8);
 
-        setsRepo.save(set1);
-        setsRepo.save(set2);
-        setsRepo.save(set3);
-
-        Record record1 = new Record(player1, player2, match1);
-        recordRepo.save(record1);
 
 
 

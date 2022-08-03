@@ -17,9 +17,9 @@ public class Record {
     private Match match;
 
     public Record(Player winner, Player loser, Match match) {
-        this.match = match;
-        this.winner=winner;
-        this.loser=loser;
+        this.match  = match;
+        this.winner = winner;
+        this.loser  = loser;
 
     }
 
@@ -40,5 +40,22 @@ public class Record {
 
     public Player getLoser() {
         return loser;
+    }
+
+    public Boolean containsPlayer(Player toMatch){
+        if(toMatch.equals(winner.getName()) || toMatch.equals(loser.getName()) ){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return "Record{" +
+                "id=" + id +
+                ", winner=" + winner +
+                ", loser=" + loser +
+                ", match=" + match +
+                '}';
     }
 }

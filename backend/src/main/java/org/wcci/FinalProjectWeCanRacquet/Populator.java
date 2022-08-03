@@ -40,6 +40,19 @@ public class Populator implements CommandLineRunner {
                 "ed1@gmail.com","6145524515");
         playerRepo.save(player2);
 
+        Player player3 = new Player("name3", "3.0", "url", "email", "phoneNumber");
+        Player player4 = new Player("name4", "3.0", "url", "email", "phoneNumber");
+        Player player5 = new Player("name5", "3.0", "url", "email", "phoneNumber");
+        Player player6 = new Player("name6", "3.5", "url", "email", "phoneNumber");
+        Player player7 = new Player("name7", "3.5", "url", "email", "phoneNumber");
+        Player player8 = new Player("name8", "3.5", "url", "email", "phoneNumber");
+        playerRepo.save(player3);
+        playerRepo.save(player4);
+        playerRepo.save(player5);
+        playerRepo.save(player6);
+        playerRepo.save(player7);
+        playerRepo.save(player8);
+
         SetsScore set1 = new SetsScore(6,0);
         SetsScore set2 = new SetsScore(3,6);
         SetsScore set3 = new SetsScore(6,4);

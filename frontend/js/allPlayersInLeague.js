@@ -1,5 +1,6 @@
 export default function allPlayersInLeague(player, players) {
   let leagueToMatch = player.league;
+  let playerName = player.name;
 
   return `
 
@@ -10,18 +11,18 @@ export default function allPlayersInLeague(player, players) {
       <thead>
       <tr>
       <th scope="col">Name</th>
-      <th scope="col">League</th>
-      <th scope="col">Phone</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
       </tr>
       </thead>
       <tbody>
       ${players.map((player) => {
-        if (player.league == leagueToMatch) {
+        if (player.league == leagueToMatch && player.name != playerName) {
           return `
                 <tr>
                   <td>${player.name}</td>
-                  <td>${player.league}</td>
-                  <td>${player.phoneNumber}</td>
+                  <td>Challenge</td>
+                  <td>Add record</td>
                 </tr>
               `;
           }

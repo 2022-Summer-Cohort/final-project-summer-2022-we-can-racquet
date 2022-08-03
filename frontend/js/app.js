@@ -26,7 +26,7 @@ function makeLoginPageFromJSON(players) {
             fetch(`http://localhost:8080/api/player/${selectedPlayer.value}`)
             .then(res => res.json())
             .then(onePlayer => {
-                  makeHomePageFromSelectedPlayer(onePlayer);
+                  makeHomePageFromSelectedPlayer(onePlayer, players);
             })
       })
 
@@ -60,10 +60,10 @@ function makeLoginPageFromJSON(players) {
 
 }
 
-function makeHomePageFromSelectedPlayer(player){
+function makeHomePageFromSelectedPlayer(player, players){
       container.innerHTML = header();
       container.innerHTML += home(player);
-      container.innerHTML += allPlayersInLeague(player);
+      container.innerHTML += allPlayersInLeague(player, players);
 
       const homeBtn = container.querySelector(".home-navigation");
       homeBtn.addEventListener ("click", () => {

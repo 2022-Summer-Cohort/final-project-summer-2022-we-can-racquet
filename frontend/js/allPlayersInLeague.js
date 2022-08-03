@@ -3,7 +3,6 @@ export default function allPlayersInLeague(player, players) {
   let playerName = player.name;
 
   return `
-
     <div class="allPlayersInLeague">
       <h3>Other players in ${leagueToMatch}</h3>
       

@@ -2,6 +2,7 @@ import home from "./home.js";
 import header from "./header.js";
 import login from "./login.js";
 import allPlayersInLeague from "./allPlayersInLeague.js";
+import allPlayerMatches from "./allPlayerMatches.js";
 
 
 const container = document.querySelector(".container");
@@ -13,7 +14,6 @@ function makeHomeView() {
                   makeLoginPageFromJSON(players);
             })
 }
-
 
 function makeLoginPageFromJSON(players) {
       // container.innerHTML = header();
@@ -64,11 +64,13 @@ function makeHomePageFromSelectedPlayer(player, players){
       container.innerHTML = header();
       container.innerHTML += home(player);
       container.innerHTML += allPlayersInLeague(player, players);
-
+      container.innerHTML += allPlayerMatches(player);
+      
       const homeBtn = container.querySelector(".home-navigation");
       homeBtn.addEventListener ("click", () => {
             makeHomeView();
       })
 
 }
+
 makeHomeView();

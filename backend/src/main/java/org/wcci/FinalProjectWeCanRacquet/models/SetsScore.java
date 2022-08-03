@@ -17,9 +17,10 @@ public class SetsScore {
     @ManyToOne
     private Match match;
 
-    public SetsScore(int point1, int point2) {
+    public SetsScore(int point1, int point2,Match match) {
         this.point1 = point1;
         this.point2 = point2;
+        this.match = match;
     }
 
     public SetsScore() {
@@ -35,5 +36,9 @@ public class SetsScore {
 
     public int getPoint2() {
         return point2;
+    }
+
+    public Match getMatch() {
+        return match;
     }
 }

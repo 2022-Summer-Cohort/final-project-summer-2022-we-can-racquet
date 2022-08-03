@@ -70,7 +70,6 @@ public class Player {
 //        return records;
 //    }
 
-
 //    public void addRecords(Record inputRecords) {
 //        records.add(inputRecords);
 //    }

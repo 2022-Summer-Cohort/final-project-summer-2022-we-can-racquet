@@ -1,6 +1,7 @@
 import home from "./home.js";
 import header from "./header.js";
 import login from "./login.js";
+import allPlayersInLeague from "./allPlayersInLeague.js";
 
 
 const container = document.querySelector(".container");
@@ -62,6 +63,7 @@ function makeLoginPageFromJSON(players) {
 function makeHomePageFromSelectedPlayer(player){
       container.innerHTML = header();
       container.innerHTML += home(player);
+      container.innerHTML += allPlayersInLeague(player);
 
       const homeBtn = container.querySelector(".home-navigation");
       homeBtn.addEventListener ("click", () => {

@@ -1,8 +1,8 @@
 package org.wcci.FinalProjectWeCanRacquet.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
 @Entity
 public class Player {
@@ -15,10 +15,11 @@ public class Player {
     private String avatarUrl;
     private int wins;
     private int losses;
-//    private Collection<Match> matches;
-//    private Collection<User> challengers;
     private String email;
     private String phoneNumber;
+
+    @OneToMany (mappedBy = "winner")
+    private Collection<Record> records;
 
     public Player(String name, String league, String avatarUrl, String email, String phoneNumber) {
         this.name = name;
@@ -26,6 +27,7 @@ public class Player {
         this.avatarUrl = avatarUrl;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.records= new ArrayList<>();
     }
 
     public Player() {
@@ -55,14 +57,6 @@ public class Player {
         return losses;
     }
 
-//    public Collection<Match> getMatches() {
-//        return matches;
-//    }
-//
-//    public Collection<User> getChallengers() {
-//        return challengers;
-//    }
-
     public String getEmail() {
         return email;
     }
@@ -70,4 +64,14 @@ public class Player {
     public String getPhoneNumber() {
         return phoneNumber;
     }
+
+
+//    public Collection<Record> getRecords() {
+//        return records;
+//    }
+
+
+//    public void addRecords(Record inputRecords) {
+//        records.add(inputRecords);
+//    }
 }

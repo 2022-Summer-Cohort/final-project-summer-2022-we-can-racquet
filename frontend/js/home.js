@@ -10,4 +10,5 @@ export default function home(player) {
             <input type="hidden" class="id_field" value="${player.id}">  
         </div>
         `;
+        
     }

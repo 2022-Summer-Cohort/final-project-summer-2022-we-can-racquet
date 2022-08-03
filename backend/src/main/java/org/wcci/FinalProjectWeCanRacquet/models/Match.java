@@ -30,6 +30,5 @@ public class Match {
 
     public Collection<SetsScore> getSetsscore() {
         return setsscore;
-
     }
 }

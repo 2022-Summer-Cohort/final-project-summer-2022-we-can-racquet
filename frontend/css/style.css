@@ -17,3 +17,14 @@
         transform:rotate(360deg);
     }
 }
+
+.loginLogo{
+    width: 95%;
+}
+
+.logoRounded {
+  width: 50%;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+}

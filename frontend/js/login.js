@@ -1,16 +1,25 @@
+
+// TODO: Submit button on default "Player Name" create undefined player, fix
+// TODO: New Player >> Add Player is allowed when no info filled in, fix
+
 export default function login(players) {
     return `
 
+
+    
+        <img class="loginLogo" src="./img/login_logo.png" alt="" srcset="">
+
         <select class="form-select playerNameSelected" required>
         <option selected disabled>Player name</option>
-            ${players.map(player =>{
-                return `
+            ${players.map((player) => {
+              return `
                     <option value=${player.id}>${player.name}</option>
-                `
+                `;
             })}
         </select>
 
         <button type="button" class="submitBtn btn btn-outline-primary">Submit</button>
+        
 
 
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@fat">New Player</button>
@@ -39,7 +48,6 @@ export default function login(players) {
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="button" class="newPlayerBtn btn btn-primary" data-bs-dismiss="modal">Add Player</button>
                 </div>
                 </div>
@@ -47,5 +55,5 @@ export default function login(players) {
         </div>
 
 
-    `
+    `;
 }

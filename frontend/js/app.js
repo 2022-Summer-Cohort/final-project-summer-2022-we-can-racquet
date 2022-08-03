@@ -15,8 +15,8 @@ function makeHomeView() {
 
 
 function makeLoginPageFromJSON(players) {
-      container.innerHTML = header();
-      container.innerHTML += login(players);
+      // container.innerHTML = header();
+      container.innerHTML = login(players);
 
       // const playersEl = container.querySelector(".user");
       const submitBtn = container.querySelector(".submitBtn");

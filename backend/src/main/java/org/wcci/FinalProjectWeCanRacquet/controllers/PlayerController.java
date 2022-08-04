@@ -34,7 +34,7 @@ public class PlayerController {
     }
 
     @GetMapping("/api/player/{id}/playerRecords")
-    public Collection<Record> findAllRecordsWithPlayer(@RequestBody Long id){
+    public Collection<Record> findAllRecordsWithPlayer(@PathVariable Long id){
         Player playerToFind = playerRepo.findById(id).get();
         return playerToFind.getRecords();
     }

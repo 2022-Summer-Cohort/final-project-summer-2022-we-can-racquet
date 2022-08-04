@@ -1,5 +1,7 @@
 package org.wcci.FinalProjectWeCanRacquet.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -12,7 +14,9 @@ public class Record {
     private Long id;
 
     @ManyToOne
-    private Player winner,loser;
+    @JsonIgnore
+    private Player winner, loser;
+
     @OneToOne
     private Match match;
 

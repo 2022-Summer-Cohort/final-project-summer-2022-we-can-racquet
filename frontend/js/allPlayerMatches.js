@@ -6,7 +6,7 @@ export default function allPlayerMatches(player) {
 
       <h1>${thisPlayer}'s Match history</h1>
 
-      ${player.records}
+      ${player.name}
 
       ${arr}
 

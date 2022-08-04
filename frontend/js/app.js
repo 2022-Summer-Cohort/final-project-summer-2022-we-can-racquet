@@ -76,8 +76,8 @@ function makeAllPlayerMatches(player){
  
       fetch(`http://localhost:8080/api/player/${player.id}/playerRecords`)
       .then(res => res.json())
-      .then(player=> {
-            allPlayerMatches(player);
+      .then(playerR=> {
+            allPlayerMatches(playerR);
             
       })
 }

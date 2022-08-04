@@ -21,8 +21,8 @@ public class Player {
     private String phoneNumber;
 
     @OneToMany (mappedBy = "winner")
-    @JsonIgnore
     private Collection<Record> records;
+
 
     public Player(String name, String league, String avatarUrl, String email, String phoneNumber) {
         this.name = name;

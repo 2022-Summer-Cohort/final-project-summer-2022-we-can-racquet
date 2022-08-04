@@ -1,5 +1,7 @@
 package org.wcci.FinalProjectWeCanRacquet.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,7 +20,9 @@ public class Player {
     private String email;
     private String phoneNumber;
 
+
     @OneToMany (mappedBy = "winner")
+    @JsonIgnore
     private Collection<Record> records;
 
     public Player(String name, String league, String avatarUrl, String email, String phoneNumber) {

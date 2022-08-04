@@ -12,7 +12,12 @@ public class Record {
     private Long id;
 
     @ManyToOne
-    private Player winner,loser;
+    @JoinColumn(name = "records", insertable = false, updatable = false)
+    private Player winner;
+    @ManyToOne
+    @JoinColumn(name = "records", insertable = false, updatable = false)
+    private Player loser;
+
     @OneToOne
     private Match match;
 
@@ -20,7 +25,6 @@ public class Record {
         this.match  = match;
         this.winner = winner;
         this.loser  = loser;
-
     }
 
     public Record() {

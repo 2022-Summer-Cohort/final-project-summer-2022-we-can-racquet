@@ -20,7 +20,7 @@ public class Player {
     private String email;
     private String phoneNumber;
 
-    @OneToMany (mappedBy = "winner")
+    @OneToMany
     @JsonIgnore
     private Collection<Record> records;
 

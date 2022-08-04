@@ -24,17 +24,17 @@ public class Player {
     @JsonIgnore
     private Collection<Record> records;
 
-    @OneToMany
-    private Collection<Player> challenges;
+//    @OneToMany
+//    private Collection<Challenge> challenges;
 
-    public Player(String name, String league, String avatarUrl, String email, String phoneNumber, Player...challenges) {
+    public Player(String name, String league, String avatarUrl, String email, String phoneNumber) {
         this.name = name;
         this.league = league;
         this.avatarUrl = avatarUrl;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.records= new ArrayList<>();
-        this.challenges = new ArrayList<>();
+//        this.challenges = new ArrayList<>();
     }
 
     public Player() {
@@ -43,9 +43,11 @@ public class Player {
     public Long getId() {
         return id;
     }
-    public void addChallenge(Player player){
-        challenges.add(player);
-    }
+
+//    public Collection<Challenge> getChallenges() {
+//        return challenges;
+//    }
+
 
     public String getName() {
         return name;
@@ -78,8 +80,8 @@ public class Player {
     public Collection<Record> getRecords() {
         return records;
     }
-
-    public Collection<Player> getChallenges() {
-        return challenges;
-    }
+//
+//    public Collection<Player> getChallenges() {
+//        return challenges;
+//    }
 }

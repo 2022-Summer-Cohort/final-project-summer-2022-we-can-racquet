@@ -70,10 +70,37 @@ function makeHomePageFromSelectedPlayer(player, players){
             makeHomeView();
       })
 
-      const challengeBtns = container.querySelectorAll(".challengeBtn");
-      challengeBtns.forEach(challengeBtn => {
+      const challengeTables = container.querySelectorAll(".playerTable");
+      challengeTables.forEach(challengeTable => {
+            const challengeBtn = challengeTable.querySelector(".challengeBtn");
+            const challengedId = challengeTable.querySelector(".id_field");
+            const challengerId = player.id;
             challengeBtn.addEventListener("click", () => {
-                  alert("cc hsdfkjlasf");
+                  const newChallengeJson = {
+                        "challengerId":challengerId,
+                        "challengedId":challengedId.value,
+                  }
+
+
+                  fetch(`http://localhost:8080/api/player/${challengerId}/challenge/${challengedId.value}`,{
+                        method: 'POST',
+                        headers: {
+                              'Content-type': 'application/json'
+                          },
+                          body: JSON.stringify(newChallengeJson)
+                  })
+                  .then(res => res.json())
+                  .then(newChallenge => {
+                        console.log(newChallenge);
+                        // makeHomePageFromSelectedPlayer(player, players)
+                        // newPlayers.forEach(newPlayer => {
+                        //       if(newPlayer.id == player.id) {
+                        //             console.log(newPlayer);
+                        //             makeHomePageFromSelectedPlayer(newPlayer, newPlayers);
+                        //       }
+                        // })
+                        
+                  })
             })
       })
 

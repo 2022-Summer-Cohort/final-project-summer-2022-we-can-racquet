@@ -29,4 +29,14 @@ public class PlayerController {
         playerRepo.save(playerToAdd);
         return playerRepo.findById(playerToAdd.getId()).get();
     }
+
+    @PostMapping("/api/player/{id}/challenge")
+    public Player challengePlayer(@PathVariable Long id) {
+        Player player = playerRepo.findById(id).get();
+        player.addChallenge(player);
+        return playerRepo.save(player);
+
+
+
+    }
 }

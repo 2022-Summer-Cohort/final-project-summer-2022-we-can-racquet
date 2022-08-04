@@ -70,5 +70,13 @@ function makeHomePageFromSelectedPlayer(player, players){
             makeHomeView();
       })
 
+      const challengeBtns = container.querySelectorAll(".challengeBtn");
+      challengeBtns.forEach(challengeBtn => {
+            challengeBtn.addEventListener("click", () => {
+                  alert("cc hsdfkjlasf");
+            })
+      })
+
+
 }
 makeHomeView();

@@ -21,7 +21,7 @@ export default function allPlayersInLeague(player, players) {
           return `
                 <tr>
                   <td>${player.name}</td>
-                  <td>Challenge</td>
+                  <td class = "challengeBtn btn">Challenge</td>
                   <td>Add record</td>
                 </tr>
               `;

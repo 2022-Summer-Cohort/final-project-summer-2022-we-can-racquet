@@ -33,7 +33,7 @@ public class PlayerController {
         return playerRepo.findById(playerToAdd.getId()).get();
     }
 
-    @GetMapping("/api/player/playerRecords")
+    @GetMapping("/api/player/{id}/playerRecords")
     public Collection<Record> findAllRecordsWithPlayer(@RequestBody Long id){
         Player playerToFind = playerRepo.findById(id).get();
         return playerToFind.getRecords();

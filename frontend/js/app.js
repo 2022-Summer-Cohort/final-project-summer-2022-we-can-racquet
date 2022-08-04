@@ -4,7 +4,6 @@ import login from "./login.js";
 import allPlayersInLeague from "./allPlayersInLeague.js";
 import allPlayerMatches from "./allPlayerMatches.js";
 
-
 const container = document.querySelector(".container");
 
 function makeHomeView() {
@@ -64,13 +63,23 @@ function makeHomePageFromSelectedPlayer(player, players){
       container.innerHTML = header();
       container.innerHTML += home(player);
       container.innerHTML += allPlayersInLeague(player, players);
-      container.innerHTML += allPlayerMatches(player);
+      container.innerHTML += makeAllPlayerMatches(player);
       
       const homeBtn = container.querySelector(".home-navigation");
       homeBtn.addEventListener ("click", () => {
             makeHomeView();
       })
 
+}
+
+function makeAllPlayerMatches(player){
+ 
+      fetch(`http://localhost:8080/api/player/${player.id}/playerRecords`)
+      .then(res => res.json())
+      .then(player=> {
+            allPlayerMatches(player);
+            
+      })
 }
 
 makeHomeView();

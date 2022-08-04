@@ -4,9 +4,6 @@
 
 export default function login(players) {
     return `
-
-
-    
         <img class="loginLogo" src="./img/login_logo.png" alt="" srcset="">
 
         <select class="form-select playerNameSelected" required>

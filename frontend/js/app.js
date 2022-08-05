@@ -97,7 +97,8 @@ function makeHomePageFromSelectedPlayer(player, players){
             const challengerId = player.id;
 
             addRecordBtn.addEventListener("click", () => {
-                  console.log("challenger:", challengerId, "challenged:", challengedId, "select1:", container.querySelector(".select1").value );
+                  const selectedValue = challengeTable.querySelector(".select1").value;
+                  console.log("challenger:", challengerId, "challenged:", challengedId, "select1:", selectedValue);
             })
             
             challengeBtn.addEventListener("click", () => {
@@ -133,7 +134,5 @@ function makeHomePageFromSelectedPlayer(player, players){
                   })
             })
       })
-
-
 }
 makeHomeView();

@@ -20,8 +20,7 @@ public class PlayerController {
     private ChallengeRepository challengeRepo;
     private RecordRepository recordRepo;
     private MatchRepository matchRepo;
-
-
+    
     public PlayerController(PlayerRepository playerRepo, ChallengeRepository challengeRepo, RecordRepository recordRepo, MatchRepository matchRepo) {
         this.playerRepo = playerRepo;
         this.challengeRepo = challengeRepo;

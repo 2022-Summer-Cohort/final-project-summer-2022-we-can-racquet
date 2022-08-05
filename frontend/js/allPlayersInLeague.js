@@ -16,7 +16,6 @@ export default function allPlayersInLeague(player, players) {
                   <input type="hidden" class="id_field" value="${playerData.id}">
                   <div>${playerData.name} - ${playerData.id}</div>
                   <div class = "challengeBtn btn">Challenge</div>
-
                   <div class = "recordBtn btn" data-bs-toggle="modal" data-bs-target="#exampleModal${playerData.id}">Add Record</div>
 
                   <div class="modal fade" id="exampleModal${playerData.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -28,7 +27,7 @@ export default function allPlayersInLeague(player, players) {
                               <h5 class="modal-title" id="exampleModalLabel">Add New Record</h5>
                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                           </div>
-              
+            
                           <div class="modal-body">
                               <form>
                                 <select class="form-select select1" aria-label="Default select example">

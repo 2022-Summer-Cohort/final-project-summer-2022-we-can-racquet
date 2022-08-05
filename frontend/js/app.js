@@ -81,6 +81,9 @@ function makeHomePageFromSelectedPlayer(player, players){
       })
 
 
+
+
+
       const homeBtn = container.querySelector(".home-navigation");
       homeBtn.addEventListener ("click", () => {
             makeHomeView();
@@ -91,6 +94,14 @@ function makeHomePageFromSelectedPlayer(player, players){
             const challengeBtn = challengeTable.querySelector(".challengeBtn");
             const challengedId = challengeTable.querySelector(".id_field");
             const challengerId = player.id;
+
+            const addRecordBtn = container.querySelector(".newRecordBtn");
+            addRecordBtn.addEventListener("click", () => {
+                  // console.log(container.querySelector(".select1").value);
+                  console.log(challengerId, challengedId.value);
+            })
+
+
             challengeBtn.addEventListener("click", () => {
                   const newChallengeJson = {
                         "challengerId":challengerId,

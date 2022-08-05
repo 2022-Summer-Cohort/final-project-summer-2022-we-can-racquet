@@ -21,12 +21,12 @@ public class Player {
     private String phoneNumber;
 
 
-    @OneToMany (mappedBy = "winner")
-    @JsonIgnore
-    private Collection<Record> records;
-
-//    @OneToMany
-//    private Collection<Challenge> challenges;
+//    @OneToMany (mappedBy = "winner")
+//    @JsonIgnore
+//    private Collection<Record> records;
+//
+////    @OneToMany
+////    private Collection<Challenge> challenges;
 
     public Player(String name, String league, String avatarUrl, String email, String phoneNumber) {
         this.name = name;
@@ -34,8 +34,8 @@ public class Player {
         this.avatarUrl = avatarUrl;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.records= new ArrayList<>();
-//        this.challenges = new ArrayList<>();
+//        this.records= new ArrayList<>();
+////        this.challenges = new ArrayList<>();
     }
 
     public Player() {
@@ -77,12 +77,12 @@ public class Player {
     public String getPhoneNumber() {
         return phoneNumber;
     }
-
-    public Collection<Record> getRecords() {
-        return records;
-    }
 //
-//    public Collection<Player> getChallenges() {
-//        return challenges;
+//    public Collection<Record> getRecords() {
+//        return records;
 //    }
+////
+////    public Collection<Player> getChallenges() {
+////        return challenges;
+////    }
 }

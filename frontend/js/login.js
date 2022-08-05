@@ -17,8 +17,6 @@ export default function login(players) {
 
         <button type="button" class="submitBtn btn btn-outline-primary">Submit</button>
         
-
-
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@fat">New Player</button>
 
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

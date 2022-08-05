@@ -19,10 +19,11 @@ export default function allPlayersInLeague(player, players) {
       ${players.map((player) => {
         if (player.league == leagueToMatch && player.name != playerName) {
           return `
-                <tr>
+                <tr class = "playerTable">
                   <td>${player.name}</td>
-                  <td>Challenge</td>
+                  <td class = "challengeBtn btn">Challenge</td>
                   <td>Add record</td>
+                  <input type="hidden" class="id_field" value="${player.id}">
                 </tr>
               `;
           }

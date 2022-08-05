@@ -51,4 +51,9 @@ public class PlayerController {
         return challenge;
 
     }
+
+    @GetMapping("/api/challenge")
+    public Iterable<Challenge> showAllChallenges() {
+        return challengeRepo.findAll();
+    }
 }

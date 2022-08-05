@@ -60,10 +60,26 @@ function makeLoginPageFromJSON(players) {
 
 }
 
+
 function makeHomePageFromSelectedPlayer(player, players){
       container.innerHTML = header();
       container.innerHTML += home(player);
       container.innerHTML += allPlayersInLeague(player, players);
+
+      fetch(`http://localhost:8080/api/challenge`)
+      .then(res => res.json())
+      .then(allChallenges => {
+            allChallenges.forEach(challenege => {
+                  if (challenege.challengedId == player.id){
+                        players.forEach(onePlayer => {
+                              if (onePlayer.id == challenege.challengerId) {
+                                    console.log("You have a challenge from " + onePlayer.name);
+                              }
+                        })
+                  }
+            })
+      })
+
 
       const homeBtn = container.querySelector(".home-navigation");
       homeBtn.addEventListener ("click", () => {
@@ -91,7 +107,7 @@ function makeHomePageFromSelectedPlayer(player, players){
                   })
                   .then(res => res.json())
                   .then(newChallenge => {
-                        console.log(newChallenge);
+                        alert("A new Challenge has been sent");
                         // makeHomePageFromSelectedPlayer(player, players)
                         // newPlayers.forEach(newPlayer => {
                         //       if(newPlayer.id == player.id) {

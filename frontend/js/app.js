@@ -2,7 +2,7 @@ import home from "./home.js";
 import header from "./header.js";
 import login from "./login.js";
 import allPlayersInLeague from "./allPlayersInLeague.js";
-import allPlayerMatches from "./allPlayerMatches.js";
+
 
 const container = document.querySelector(".container");
 
@@ -13,6 +13,7 @@ function makeHomeView() {
                   makeLoginPageFromJSON(players);
             })
 }
+
 
 function makeLoginPageFromJSON(players) {
       // container.innerHTML = header();
@@ -59,27 +60,66 @@ function makeLoginPageFromJSON(players) {
 
 }
 
+
 function makeHomePageFromSelectedPlayer(player, players){
       container.innerHTML = header();
       container.innerHTML += home(player);
       container.innerHTML += allPlayersInLeague(player, players);
-      container.innerHTML += makeAllPlayerMatches(player);
-      
+
+      fetch(`http://localhost:8080/api/challenge`)
+      .then(res => res.json())
+      .then(allChallenges => {
+            allChallenges.forEach(challenege => {
+                  if (challenege.challengedId == player.id){
+                        players.forEach(onePlayer => {
+                              if (onePlayer.id == challenege.challengerId) {
+                                    console.log("You have a challenge from " + onePlayer.name);
+                              }
+                        })
+                  }
+            })
+      })
+
+
       const homeBtn = container.querySelector(".home-navigation");
       homeBtn.addEventListener ("click", () => {
             makeHomeView();
       })
 
-}
+      const challengeTables = container.querySelectorAll(".playerTable");
+      challengeTables.forEach(challengeTable => {
+            const challengeBtn = challengeTable.querySelector(".challengeBtn");
+            const challengedId = challengeTable.querySelector(".id_field");
+            const challengerId = player.id;
+            challengeBtn.addEventListener("click", () => {
+                  const newChallengeJson = {
+                        "challengerId":challengerId,
+                        "challengedId":challengedId.value,
+                  }
 
-function makeAllPlayerMatches(player){
- 
-      fetch(`http://localhost:8080/api/player/${player.id}/playerRecords`)
-      .then(res => res.json())
-      .then(player=> {
-            allPlayerMatches(player);
-            
+
+                  fetch(`http://localhost:8080/api/player/${challengerId}/challenge/${challengedId.value}`,{
+                        method: 'POST',
+                        headers: {
+                              'Content-type': 'application/json'
+                          },
+                          body: JSON.stringify(newChallengeJson)
+                  })
+                  .then(res => res.json())
+                  .then(newChallenge => {
+                        alert("A new Challenge has been sent");
+                        // makeHomePageFromSelectedPlayer(player, players)
+                        // newPlayers.forEach(newPlayer => {
+                        //       if(newPlayer.id == player.id) {
+                        //             console.log(newPlayer);
+                        //             makeHomePageFromSelectedPlayer(newPlayer, newPlayers);
+                        //       }
+                        // })
+                        
+                  })
+            })
       })
-}
 
+
+}
 makeHomeView();

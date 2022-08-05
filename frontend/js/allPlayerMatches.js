@@ -8,7 +8,8 @@ export default function allPlayerMatches(player) {
 
       ${player.records}
 
-      ${arr}
+      ${arr}  
+      
 
 
 

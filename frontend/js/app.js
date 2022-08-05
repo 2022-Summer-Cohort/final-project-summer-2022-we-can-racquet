@@ -69,10 +69,10 @@ function makeHomePageFromSelectedPlayer(player, players){
       fetch(`http://localhost:8080/api/challenge`)
       .then(res => res.json())
       .then(allChallenges => {
-            allChallenges.forEach(challenege => {
-                  if (challenege.challengedId == player.id){
+            allChallenges.forEach(challenge => {
+                  if (challenge.challengedId == player.id){
                         players.forEach(onePlayer => {
-                              if (onePlayer.id == challenege.challengerId) {
+                              if (onePlayer.id == challenge.challengerId) {
                                     console.log("You have a challenge from " + onePlayer.name);
                               }
                         })
@@ -80,36 +80,32 @@ function makeHomePageFromSelectedPlayer(player, players){
             })
       })
 
-
-
-
-
       const homeBtn = container.querySelector(".home-navigation");
+
       homeBtn.addEventListener ("click", () => {
             makeHomeView();
       })
 
       const challengeTables = container.querySelectorAll(".playerTable");
+      console.log(challengeTables)
       challengeTables.forEach(challengeTable => {
+
             const challengeBtn = challengeTable.querySelector(".challengeBtn");
-            const challengedId = challengeTable.querySelector(".id_field");
+            const addRecordBtn = challengeTable.querySelector(".newRecordBtn");
+            
+            const challengedId = challengeTable.querySelector(".id_field").value;
             const challengerId = player.id;
 
-            const addRecordBtn = container.querySelector(".newRecordBtn");
             addRecordBtn.addEventListener("click", () => {
-                  // console.log(container.querySelector(".select1").value);
-                  console.log(challengerId, challengedId.value);
+                  console.log("challenger:", challengerId, "challenged:", challengedId, "select1:", container.querySelector(".select1").value );
             })
-
-
+            
             challengeBtn.addEventListener("click", () => {
                   const newChallengeJson = {
                         "challengerId":challengerId,
-                        "challengedId":challengedId.value,
+                        "challengedId":challengedId,
                   }
-
-
-                  fetch(`http://localhost:8080/api/player/${challengerId}/challenge/${challengedId.value}`,{
+                  fetch(`http://localhost:8080/api/player/${challengerId}/challenge/${challengedId}`,{
                         method: 'POST',
                         headers: {
                               'Content-type': 'application/json'
@@ -118,7 +114,14 @@ function makeHomePageFromSelectedPlayer(player, players){
                   })
                   .then(res => res.json())
                   .then(newChallenge => {
-                        alert("A new Challenge has been sent");
+                        // alert("A new Challenge has been sent to ", challengerId, newChallenge.challengedId);
+
+                        players.forEach(player => {
+                              if(player.id == newChallenge.challengedId){
+                                    console.log("A new Challenge has been sent to ", player.name);
+                              }
+                        })
+
                         // makeHomePageFromSelectedPlayer(player, players)
                         // newPlayers.forEach(newPlayer => {
                         //       if(newPlayer.id == player.id) {

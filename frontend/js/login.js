@@ -17,38 +17,40 @@ export default function login(players) {
 
         <button type="button" class="submitBtn btn btn-outline-primary">Submit</button>
         
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@fat">New Player</button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginNewPlayerModal" data-bs-whatever="@fat">New Player</button>
 
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="loginNewPlayerModal" tabindex="-1" aria-labelledby="loginNewPlayerModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add New Player</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                    <div class="mb-3">
-                        <label for="player-name" class="col-form-label">Name:</label>
-                        <input type="text" class="form-control" id="player-name">
+                
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="loginNewPlayerModalLabel">Add New Player</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="mb-3">
-                        <label for="player-email" class="col-form-label">Email:</label>
-                        <input type="text" class="form-control" id="player-email">
+
+                    <div class="modal-body">
+                        <form>
+                            <div class="row mb-3">
+                                <label for="player-name" class="col-form-label col-3">Name:</label>
+                                <input type="text" class="form-control col" id="new-player-name">
+                            </div>
+                            <div class="row mb-3">
+                                <label for="player-email" class="col-form-label col-3">Email:</label>
+                                <input type="text" class="form-control col" id="new-player-email">
+                            </div>
+                            <div class="row mb-3">
+                                <label for="player-phoneNumber" class="col-form-label col-3">Phone #: </label>
+                                <input type="text" class="form-control col" id="new-player-phoneNumber">
+                            </div>
+                        </form>
                     </div>
-                    <div class="mb-3">
-                    <label for="player-phoneNumber" class="col-form-label">Phone #: </label>
-                    <input type="text" class="form-control" id="player-phoneNumber">
-                </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="newPlayerBtn btn btn-primary" data-bs-dismiss="modal">Add Player</button>
-                </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="newPlayerBtn btn btn-primary" data-bs-dismiss="modal">Add Player</button>
+                    </div>
+
                 </div>
             </div>
         </div>
-
-
     `;
 }

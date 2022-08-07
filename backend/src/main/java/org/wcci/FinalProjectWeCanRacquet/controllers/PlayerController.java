@@ -2,9 +2,15 @@ package org.wcci.FinalProjectWeCanRacquet.controllers;
 
 import org.springframework.web.bind.annotation.*;
 import org.wcci.FinalProjectWeCanRacquet.models.Challenge;
+import org.wcci.FinalProjectWeCanRacquet.models.Match;
 import org.wcci.FinalProjectWeCanRacquet.models.Player;
+import org.wcci.FinalProjectWeCanRacquet.models.Record;
 import org.wcci.FinalProjectWeCanRacquet.repos.ChallengeRepository;
+import org.wcci.FinalProjectWeCanRacquet.repos.MatchRepository;
 import org.wcci.FinalProjectWeCanRacquet.repos.PlayerRepository;
+import org.wcci.FinalProjectWeCanRacquet.repos.RecordRepository;
+
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping()
@@ -12,10 +18,14 @@ public class PlayerController {
 
     private PlayerRepository playerRepo;
     private ChallengeRepository challengeRepo;
-
-    public PlayerController(PlayerRepository playerRepo, ChallengeRepository challengeRepo) {
+    private RecordRepository recordRepo;
+    private MatchRepository matchRepo;
+    
+    public PlayerController(PlayerRepository playerRepo, ChallengeRepository challengeRepo, RecordRepository recordRepo, MatchRepository matchRepo) {
         this.playerRepo = playerRepo;
         this.challengeRepo = challengeRepo;
+        this.recordRepo = recordRepo;
+        this.matchRepo = matchRepo;
     }
 
     @GetMapping("/api/player")
@@ -45,15 +55,24 @@ public class PlayerController {
 
     @PostMapping("/api/player/{challengerId}/challenge/{challengedId}")
     public Challenge addNewChallenge(@PathVariable Long challengerId, @PathVariable Long challengedId){
-
         Challenge challenge = new Challenge(challengerId,challengedId);
         challengeRepo.save(challenge);
         return challenge;
-
     }
 
     @GetMapping("/api/challenge")
     public Iterable<Challenge> showAllChallenges() {
         return challengeRepo.findAll();
+    }
+
+    @GetMapping("/api/record")
+    public Iterable<Record> showAllRecords(){return recordRepo.findAll();}
+
+
+    @PostMapping("api/player/{winner}/record/{loser}")
+    public Record addNewRecord(@PathVariable Long winner, @PathVariable Long loser, @RequestBody ArrayList<Integer> match){
+        Record record1 = new Record(winner, loser, match);
+        recordRepo.save(record1);
+        return record1;
     }
 }

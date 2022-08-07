@@ -13,6 +13,8 @@ import org.wcci.FinalProjectWeCanRacquet.repos.RecordRepository;
 import org.wcci.FinalProjectWeCanRacquet.repos.SetsRepository;
 
 import javax.persistence.SecondaryTable;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 @Component
 public class Populator implements CommandLineRunner {
@@ -34,26 +36,16 @@ public class Populator implements CommandLineRunner {
 
         Player player1 = new Player("Ed","3.0","https://img.freepik.com/premium-vector/man-character-avatar-icon-tennis-sport_51635-2515.jpg",
                 "ed1@gmail.com","6145524515");
-        playerRepo.save(player1);
-
         Player player2 = new Player("Anish","3.0","https://img.freepik.com/premium-vector/man-character-avatar-icon-tennis-sport_51635-2515.jpg",
                 "ed1@gmail.com","6145524515");
-        playerRepo.save(player2);
-
-
-        Match match1 = new Match();
-        matchRepo.save(match1);
-
-        SetsScore set1 = new SetsScore(6,0,match1);
-        SetsScore set2 = new SetsScore(3,6,match1);
-        SetsScore set3 = new SetsScore(6,4,match1);
-
         Player player3 = new Player("name3", "3.0", "url", "email", "phoneNumber");
         Player player4 = new Player("name4", "3.0", "url", "email", "phoneNumber");
         Player player5 = new Player("name5", "3.0", "url", "email", "phoneNumber");
         Player player6 = new Player("name6", "3.5", "url", "email", "phoneNumber");
         Player player7 = new Player("name7", "3.5", "url", "email", "phoneNumber");
         Player player8 = new Player("name8", "3.5", "url", "email", "phoneNumber");
+        playerRepo.save(player1);
+        playerRepo.save(player2);
         playerRepo.save(player3);
         playerRepo.save(player4);
         playerRepo.save(player5);
@@ -61,12 +53,23 @@ public class Populator implements CommandLineRunner {
         playerRepo.save(player7);
         playerRepo.save(player8);
 
-        setsRepo.save(set1);
-        setsRepo.save(set2);
-        setsRepo.save(set3);
+//        Match match1 = new Match();
+//        matchRepo.save(match1);
+//
+//        SetsScore set1 = new SetsScore(6,0, match1);
+//        SetsScore set2 = new SetsScore(3,6, match1);
+//        SetsScore set3 = new SetsScore(6,4, match1);
+//        setsRepo.save(set1);
+//        setsRepo.save(set2);
+//        setsRepo.save(set3);
 
-        Record record1 = new Record(player1, player2, match1);
+        ArrayList<Integer> match1 = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+        Record record1 = new Record(1L, 2L, match1);
         recordRepo.save(record1);
+
+
+
 
 
 

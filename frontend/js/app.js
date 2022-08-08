@@ -51,12 +51,12 @@ function makeLoginPageFromJSON(players) {
             }
             console.log(newPlayerJson);
             fetch(`http://localhost:8080/api/player`, {
-                  method: 'POST',
-                  headers: {
-                        'Content-type': 'application/json'
-                  },
-                  body: JSON.stringify(newPlayerJson)
-            })
+                        method: 'POST',
+                        headers: {
+                              'Content-type': 'application/json'
+                        },
+                        body: JSON.stringify(newPlayerJson)
+                  })
                   .then(res => res.json())
                   .then(newPlayer => {
                         makeHomeView();
@@ -77,7 +77,88 @@ function makeHomePageFromSelectedPlayer(player, players) {
       fetch(`http://localhost:8080/api/challenge`)
             .then((res) => res.json())
             .then((allChallenges) => {
-                  container.innerHTML += allPlayerChallenges(player,players,allChallenges);
+                  container.innerHTML += allPlayerChallenges(player, players, allChallenges);
+
+                  // ALL PLAYERS IN LEAGUE TABLE (Challenge, Add record buttons)
+                  const allPlayersInLeagueRows = container.querySelectorAll(
+                        ".singlePlayerInLeagueRow"
+                  );
+
+                  allPlayersInLeagueRows.forEach((singlePlayerInLeagueRow) => {
+                        const challengeBtn = singlePlayerInLeagueRow.querySelector(".challengeBtn");
+                        const addRecordBtn = singlePlayerInLeagueRow.querySelector(".addRecordBtn");
+
+                        const challengerId = player.id;
+                        const challengedId =
+                              singlePlayerInLeagueRow.querySelector(".hiddenPlayerId").value;
+
+                        // ADD RECORD BUTTON
+                        addRecordBtn.addEventListener("click", () => {
+                              // get score values from dropdowns
+                              const set10 = singlePlayerInLeagueRow.querySelector(".select1").value;
+                              const set11 = singlePlayerInLeagueRow.querySelector(".select2").value;
+                              const set20 = singlePlayerInLeagueRow.querySelector(".select3").value;
+                              const set21 = singlePlayerInLeagueRow.querySelector(".select4").value;
+                              const set30 = singlePlayerInLeagueRow.querySelector(".select5").value;
+                              const set31 = singlePlayerInLeagueRow.querySelector(".select6").value;
+
+                              const newMatch = [set10, set11, set20, set21, set30, set31];
+                              // console.log(challengerId, challengedId, newMatch);
+
+                              const newRecordJSON = {
+                                    winner: challengerId,
+                                    loser: challengedId,
+                                    match: newMatch,
+                              };
+                              fetch(
+                                          `http://localhost:8080/api/player/${challengerId}/record/${challengedId}`, {
+                                                method: "POST",
+                                                headers: {
+                                                      "Content-type": "application/json",
+                                                },
+                                                body: JSON.stringify(newMatch),
+                                          }
+                                    )
+                                    .then((res) => res.json())
+                                    .then((newPlayers) => {
+                                          newPlayers.forEach((newPlayer) => {
+                                                if (newPlayer.id == challengerId) {
+                                                      makeHomePageFromSelectedPlayer(newPlayer, newPlayers)
+                                                }
+                                          });
+                                    });
+                        });
+
+                        // CHALLENGE PLAYER BUTTON
+                        challengeBtn.addEventListener("click", () => {
+                              const newChallengeJson = {
+                                    challengerId: challengerId,
+                                    challengedId: challengedId,
+                              };
+                              fetch(
+                                          `http://localhost:8080/api/player/${challengerId}/challenge/${challengedId}`, {
+                                                method: "POST",
+                                                headers: {
+                                                      "Content-type": "application/json",
+                                                },
+                                                body: JSON.stringify(newChallengeJson),
+                                          }
+                                    )
+                                    .then((res) => res.json())
+                                    .then((newChallenge) => {
+                                          players.forEach((player) => {
+                                                if (player.id == newChallenge.challengedId) {
+                                                      console.log("A new Challenge has been sent to", player.name);
+                                                }
+                                          });
+                                    });
+                        });
+                  });
+                  // NAVBAR HOME BUTTON
+                  const homeBtn = container.querySelector(".home-navigation");
+                  homeBtn.addEventListener("click", () => {
+                        makeHomeView();
+                  });
             });
 
       fetch(`http://localhost:8080/api/record`)
@@ -118,15 +199,14 @@ function makeHomePageFromSelectedPlayer(player, players) {
                                     match: newMatch,
                               };
                               fetch(
-                                    `http://localhost:8080/api/player/${challengerId}/record/${challengedId}`,
-                                    {
-                                          method: "POST",
-                                          headers: {
-                                                "Content-type": "application/json",
-                                          },
-                                          body: JSON.stringify(newMatch),
-                                    }
-                              )
+                                          `http://localhost:8080/api/player/${challengerId}/record/${challengedId}`, {
+                                                method: "POST",
+                                                headers: {
+                                                      "Content-type": "application/json",
+                                                },
+                                                body: JSON.stringify(newMatch),
+                                          }
+                                    )
                                     .then((res) => res.json())
                                     .then((newPlayers) => {
                                           newPlayers.forEach((newPlayer) => {
@@ -144,14 +224,14 @@ function makeHomePageFromSelectedPlayer(player, players) {
                                     challengedId: challengedId,
                               };
                               fetch(
-                                    `http://localhost:8080/api/player/${challengerId}/challenge/${challengedId}`, {
-                                    method: "POST",
-                                    headers: {
-                                          "Content-type": "application/json",
-                                    },
-                                    body: JSON.stringify(newChallengeJson),
-                              }
-                              )
+                                          `http://localhost:8080/api/player/${challengerId}/challenge/${challengedId}`, {
+                                                method: "POST",
+                                                headers: {
+                                                      "Content-type": "application/json",
+                                                },
+                                                body: JSON.stringify(newChallengeJson),
+                                          }
+                                    )
                                     .then((res) => res.json())
                                     .then((newChallenge) => {
                                           players.forEach((player) => {

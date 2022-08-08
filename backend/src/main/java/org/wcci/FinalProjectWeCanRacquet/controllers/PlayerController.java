@@ -44,15 +44,6 @@ public class PlayerController {
         return playerRepo.findById(playerToAdd.getId()).get();
     }
 
-//    @PostMapping("/api/player/{id}/challenge/{challengerId}")
-//    public Iterable<Player> challengePlayer(@PathVariable Long id, @PathVariable Long challengerId) {
-//        Player player = playerRepo.findById(id).get();
-//        Player challenger = playerRepo.findById(challengerId).get();
-//        player.addChallenge(challenger);
-//        playerRepo.save(player);
-//        return playerRepo.findAll();
-//    }
-
     @PostMapping("/api/player/{challengerId}/challenge/{challengedId}")
     public Challenge addNewChallenge(@PathVariable Long challengerId, @PathVariable Long challengedId){
         Challenge challenge = new Challenge(challengerId,challengedId);

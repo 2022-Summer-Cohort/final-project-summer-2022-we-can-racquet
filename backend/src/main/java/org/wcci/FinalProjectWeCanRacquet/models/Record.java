@@ -21,9 +21,11 @@ public class Record {
     private Long loser;
 
 //    @OneToOne
-    private ArrayList<Integer> match;
+//    private ArrayList<Integer> match;
+    private int[] matcharr = new int[5];
 
-    public Record(Long winner, Long loser, ArrayList<Integer> match) {
+
+    public Record(Long winner, Long loser, int[] match) {
         this.match  = match;
         this.winner = winner;
         this.loser  = loser;

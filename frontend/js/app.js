@@ -64,14 +64,14 @@ function makeLoginPageFromJSON(players) {
       })
 }
 
-function tempPlayerSelectedWithRecord(player, players, record) {
+// function tempPlayerSelectedWithRecord(player, players, record) {
 
-      {player.name}
+//       { player.name }
 
-      // Populate all matches from a single player
-      container.innerHTML += allPlayerMatches(player, players,record);
+//       // Populate all matches from a single player
+//       container.innerHTML += allPlayerMatches(player, players, record);
 
-}
+// }
 
 function makeHomePageFromSelectedPlayer(player, players) {
 
@@ -81,11 +81,6 @@ function makeHomePageFromSelectedPlayer(player, players) {
       // Populate matching league players table
       container.innerHTML += allPlayersInLeague(player, players);
 
-      // NAVBAR HOME BUTTON
-      const homeBtn = container.querySelector(".home-navigation");
-      homeBtn.addEventListener("click", () => {
-            makeHomeView();
-      });
 
 
       // CHALLENGE NOTIFICATION
@@ -103,121 +98,142 @@ function makeHomePageFromSelectedPlayer(player, players) {
                   });
             });
 
-      // DISPLAY ALL PLAYER RECORD
+      // // DISPLAY ALL PLAYER RECORD
+      // fetch(`http://localhost:8080/api/record`)
+      //       .then((res) => res.json())
+      //       .then((allRecords) => {
+      //             allRecords.forEach((record) => {
+      //                   if (player.id == record.winner || player.id == record.loser) {
+      //                         console.log(record);
+      //                         tempPlayerSelectedWithRecord(player, players, record)
+      //                   }
+      //             });
+      //       });
+
       fetch(`http://localhost:8080/api/record`)
             .then((res) => res.json())
             .then((allRecords) => {
-                  allRecords.forEach((record) => {
-                        if (player.id == record.winner || player.id == record.loser) {
-                              console.log(record);
-                              tempPlayerSelectedWithRecord(player, players, record)
-                        }
-                  });
-            });
+                  // console.log(allRecords);
+                  container.innerHTML += allPlayerMatches(player, players, allRecords);
 
-      // ALL PLAYERS IN LEAGUE TABLE (Challenge, Add record buttons)
-      const allPlayersInLeagueRows = container.querySelectorAll(
-            ".singlePlayerInLeagueRow"
-      );
+                  // ALL PLAYERS IN LEAGUE TABLE (Challenge, Add record buttons)
+                  const allPlayersInLeagueRows = container.querySelectorAll(
+                        ".singlePlayerInLeagueRow"
+                  );
 
-      allPlayersInLeagueRows.forEach((singlePlayerInLeagueRow) => {
-            const challengeBtn = singlePlayerInLeagueRow.querySelector(".challengeBtn");
-            const addRecordBtn = singlePlayerInLeagueRow.querySelector(".addRecordBtn");
+                  allPlayersInLeagueRows.forEach((singlePlayerInLeagueRow) => {
+                        const challengeBtn = singlePlayerInLeagueRow.querySelector(".challengeBtn");
+                        const addRecordBtn = singlePlayerInLeagueRow.querySelector(".addRecordBtn");
 
-            const challengerId = player.id;
-            const challengedId =
-                  singlePlayerInLeagueRow.querySelector(".hiddenPlayerId").value;
+                        const challengerId = player.id;
+                        const challengedId =
+                              singlePlayerInLeagueRow.querySelector(".hiddenPlayerId").value;
 
-            // ADD RECORD BUTTON
-            addRecordBtn.addEventListener("click", () => {
-                  // get score values from dropdowns
-                  const set10 = singlePlayerInLeagueRow.querySelector(".select1").value;
-                  const set11 = singlePlayerInLeagueRow.querySelector(".select2").value;
-                  const set20 = singlePlayerInLeagueRow.querySelector(".select3").value;
-                  const set21 = singlePlayerInLeagueRow.querySelector(".select4").value;
-                  const set30 = singlePlayerInLeagueRow.querySelector(".select5").value;
-                  const set31 = singlePlayerInLeagueRow.querySelector(".select6").value;
+                        // ADD RECORD BUTTON
+                        addRecordBtn.addEventListener("click", () => {
+                              // get score values from dropdowns
+                              const set10 = singlePlayerInLeagueRow.querySelector(".select1").value;
+                              const set11 = singlePlayerInLeagueRow.querySelector(".select2").value;
+                              const set20 = singlePlayerInLeagueRow.querySelector(".select3").value;
+                              const set21 = singlePlayerInLeagueRow.querySelector(".select4").value;
+                              const set30 = singlePlayerInLeagueRow.querySelector(".select5").value;
+                              const set31 = singlePlayerInLeagueRow.querySelector(".select6").value;
 
-                  const newMatch = [set10, set11, set20, set21, set30, set31];
-                  // console.log(challengerId, challengedId, newMatch);
+                              const newMatch = [set10, set11, set20, set21, set30, set31];
+                              // console.log(challengerId, challengedId, newMatch);
 
 
-                  const newRecordJSON = {
-                        winner: challengerId,
-                        loser: challengedId,
-                        match: newMatch,
-                  };
-                  fetch(
-                        `http://localhost:8080/api/player/${challengerId}/record/${challengedId}`,
-                        {
-                              method: "POST",
-                              headers: {
-                                    "Content-type": "application/json",
-                              },
-                              body: JSON.stringify(newMatch),
-                        }
-                  )
-                        .then((res) => res.json())
-                        .then((newRecord) => {
-                              // console.log(newRecord);
-                              makeHomeView();
-                        });
-
-
-
-
-                  // // FOR CONSOLE.LOG
-                  // let winner, loser = "";
-                  // // get player names
-                  // players.forEach((player) => {
-                  //       if (player.id == challengerId) {
-                  //             winner = player.name;
-                  //       }
-                  //       if (player.id == challengedId) {
-                  //             loser = player.name;
-                  //       }
-                  // });
-                  // // console.log("Winner:", challengerId, "Loser:", challengedId);
-                  // // console.log("Winner:", winner, "Loser:", loser);
-                  // // const set1 = [set10, "-", set11];
-                  // // const set2 = [set20, "-", set21];
-                  // // const set3 = [set30, "-", set31];
-                  // // console.log(
-                  // //       "Set1:",
-                  // //       set1.join(""),
-                  // //       ", Set2:",
-                  // //       set2.join(""),
-                  // //       ", Set3:",
-                  // //       set3.join("")
-                  // // );
-
-            });
-
-            // CHALLENGE PLAYER BUTTON
-            challengeBtn.addEventListener("click", () => {
-                  const newChallengeJson = {
-                        challengerId: challengerId,
-                        challengedId: challengedId,
-                  };
-                  fetch(
-                        `http://localhost:8080/api/player/${challengerId}/challenge/${challengedId}`, {
-                        method: "POST",
-                        headers: {
-                              "Content-type": "application/json",
-                        },
-                        body: JSON.stringify(newChallengeJson),
-                  }
-                  )
-                        .then((res) => res.json())
-                        .then((newChallenge) => {
-                              players.forEach((player) => {
-                                    if (player.id == newChallenge.challengedId) {
-                                          console.log("A new Challenge has been sent to", player.name);
+                              const newRecordJSON = {
+                                    winner: challengerId,
+                                    loser: challengedId,
+                                    match: newMatch,
+                              };
+                              fetch(
+                                    `http://localhost:8080/api/player/${challengerId}/record/${challengedId}`,
+                                    {
+                                          method: "POST",
+                                          headers: {
+                                                "Content-type": "application/json",
+                                          },
+                                          body: JSON.stringify(newMatch),
                                     }
-                              });
-                        });
-            });
-      });
-}
+                              )
+                                    .then((res) => res.json())
+                                    .then((newPlayers) => {
+                                          newPlayers.forEach((newPlayer) => {
+                                                if (newPlayer.id == challengerId) {
+                                                      makeHomePageFromSelectedPlayer(newPlayer, newPlayers)
+                                                }
+                                          });
 
+                                          // makeHomePageFromSelectedPlayer(player, players)
+                                          // makeHomeView();
+
+
+
+                                    });
+
+
+
+
+                              // // FOR CONSOLE.LOG
+                              // let winner, loser = "";
+                              // // get player names
+                              // players.forEach((player) => {
+                              //       if (player.id == challengerId) {
+                              //             winner = player.name;
+                              //       }
+                              //       if (player.id == challengedId) {
+                              //             loser = player.name;
+                              //       }
+                              // });
+                              // // console.log("Winner:", challengerId, "Loser:", challengedId);
+                              // // console.log("Winner:", winner, "Loser:", loser);
+                              // // const set1 = [set10, "-", set11];
+                              // // const set2 = [set20, "-", set21];
+                              // // const set3 = [set30, "-", set31];
+                              // // console.log(
+                              // //       "Set1:",
+                              // //       set1.join(""),
+                              // //       ", Set2:",
+                              // //       set2.join(""),
+                              // //       ", Set3:",
+                              // //       set3.join("")
+                              // // );
+
+                        });
+
+                        // CHALLENGE PLAYER BUTTON
+                        challengeBtn.addEventListener("click", () => {
+                              const newChallengeJson = {
+                                    challengerId: challengerId,
+                                    challengedId: challengedId,
+                              };
+                              fetch(
+                                    `http://localhost:8080/api/player/${challengerId}/challenge/${challengedId}`, {
+                                    method: "POST",
+                                    headers: {
+                                          "Content-type": "application/json",
+                                    },
+                                    body: JSON.stringify(newChallengeJson),
+                              }
+                              )
+                                    .then((res) => res.json())
+                                    .then((newChallenge) => {
+                                          players.forEach((player) => {
+                                                if (player.id == newChallenge.challengedId) {
+                                                      console.log("A new Challenge has been sent to", player.name);
+                                                }
+                                          });
+                                    });
+                        });
+                  });
+                  // NAVBAR HOME BUTTON
+                  const homeBtn = container.querySelector(".home-navigation");
+                  homeBtn.addEventListener("click", () => {
+                        makeHomeView();
+                  });
+
+            });
+}
 makeHomeView();

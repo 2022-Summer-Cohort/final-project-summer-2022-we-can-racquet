@@ -22,7 +22,7 @@ public class Record {
 
 //    @OneToOne
 //    private ArrayList<Integer> match;
-    private int[] matcharr = new int[5];
+    private int[] match = new int[6];
 
 
     public Record(Long winner, Long loser, int[] match) {
@@ -42,7 +42,12 @@ public class Record {
         return winner;
     }
 
-    public ArrayList<Integer> getMatch() {
+//    public ArrayList<Integer> getMatch() {
+//        return match;
+//    }
+
+
+    public int[] getMatch() {
         return match;
     }
 

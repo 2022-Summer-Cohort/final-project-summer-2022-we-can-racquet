@@ -59,9 +59,8 @@ public class PlayerController {
     @GetMapping("/api/record")
     public Iterable<Record> showAllRecords(){return recordRepo.findAll();}
 
-
     @PostMapping("api/player/{winner}/record/{loser}")
-    public Record addNewRecord(@PathVariable Long winner, @PathVariable Long loser, @RequestBody ArrayList<Integer> match){
+    public Record addNewRecord(@PathVariable Long winner, @PathVariable Long loser, @RequestBody int[] match){
         Record record1 = new Record(winner, loser, match);
         recordRepo.save(record1);
         return record1;

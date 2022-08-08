@@ -63,7 +63,9 @@ public class Populator implements CommandLineRunner {
 //        setsRepo.save(set2);
 //        setsRepo.save(set3);
 
-        ArrayList<Integer> match1 = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+//        ArrayList<Integer> match1 = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+        int[] match1 = {1,2,3,4,5,6};
+
 
         Record record1 = new Record(1L, 2L, match1);
         recordRepo.save(record1);

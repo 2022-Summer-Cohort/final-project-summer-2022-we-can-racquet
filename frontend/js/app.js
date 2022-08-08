@@ -50,12 +50,12 @@ function makeLoginPageFromJSON(players) {
             }
             console.log(newPlayerJson);
             fetch(`http://localhost:8080/api/player`, {
-                        method: 'POST',
-                        headers: {
-                              'Content-type': 'application/json'
-                        },
-                        body: JSON.stringify(newPlayerJson)
-                  })
+                  method: 'POST',
+                  headers: {
+                        'Content-type': 'application/json'
+                  },
+                  body: JSON.stringify(newPlayerJson)
+            })
                   .then(res => res.json())
                   .then(newPlayer => {
                         makeHomeView();
@@ -97,6 +97,17 @@ function makeHomePageFromSelectedPlayer(player, players) {
                   });
             });
 
+            // DISPLAY ALL PLAYER RECORD
+            // fetch(`http://localhost:8080/api/record`)
+            // .then((res) => res.json())
+            // .then((allRecords) => {
+            //       allRecords.forEach((record) => {
+            //             if(player.id == record.winner || player.id == record.loser) {
+            //               console.log(record);
+            //             }
+            //       });
+            // });
+
       // ALL PLAYERS IN LEAGUE TABLE (Challenge, Add record buttons)
       const allPlayersInLeagueRows = container.querySelectorAll(
             ".singlePlayerInLeagueRow"
@@ -121,57 +132,57 @@ function makeHomePageFromSelectedPlayer(player, players) {
                   const set31 = singlePlayerInLeagueRow.querySelector(".select6").value;
 
                   const newMatch = [set10, set11, set20, set21, set30, set31];
-                  console.log(challengerId, challengedId, newMatch);
+                  // console.log(challengerId, challengedId, newMatch);
 
 
                   const newRecordJSON = {
-                    winner: challengerId,
-                    loser: challengedId,
-                    match: newMatch,
+                        winner: challengerId,
+                        loser: challengedId,
+                        match: newMatch,
                   };
                   fetch(
-                    `http://localhost:8080/api/player/${challengerId}/record/${challengedId}`,
-                    {
-                      method: "POST",
-                      headers: {
-                        "Content-type": "application/json",
-                      },
-                      body: JSON.stringify(newRecordJSON),
-                    }
+                        `http://localhost:8080/api/player/${challengerId}/record/${challengedId}`,
+                        {
+                              method: "POST",
+                              headers: {
+                                    "Content-type": "application/json",
+                              },
+                              body: JSON.stringify(newMatch),
+                        }
                   )
-                    .then((res) => res.json())
-                    .then((newRecord) => {
-                      console.log(newRecord);
-                      makeHomeView();
-                    });
+                        .then((res) => res.json())
+                        .then((newRecord) => {
+                              // console.log(newRecord);
+                              makeHomeView();
+                        });
 
 
 
 
-                  // FOR CONSOLE.LOG
-                  let winner, loser = "";
-                  // get player names
-                  players.forEach((player) => {
-                        if (player.id == challengerId) {
-                              winner = player.name;
-                        }
-                        if (player.id == challengedId) {
-                              loser = player.name;
-                        }
-                  });
-                  // console.log("Winner:", challengerId, "Loser:", challengedId);
-                  console.log("Winner:", winner, "Loser:", loser);
-                  const set1 = [set10, "-", set11];
-                  const set2 = [set20, "-", set21];
-                  const set3 = [set30, "-", set31];
-                  console.log(
-                        "Set1:",
-                        set1.join(""),
-                        ", Set2:",
-                        set2.join(""),
-                        ", Set3:",
-                        set3.join("")
-                  );
+                  // // FOR CONSOLE.LOG
+                  // let winner, loser = "";
+                  // // get player names
+                  // players.forEach((player) => {
+                  //       if (player.id == challengerId) {
+                  //             winner = player.name;
+                  //       }
+                  //       if (player.id == challengedId) {
+                  //             loser = player.name;
+                  //       }
+                  // });
+                  // // console.log("Winner:", challengerId, "Loser:", challengedId);
+                  // // console.log("Winner:", winner, "Loser:", loser);
+                  // // const set1 = [set10, "-", set11];
+                  // // const set2 = [set20, "-", set21];
+                  // // const set3 = [set30, "-", set31];
+                  // // console.log(
+                  // //       "Set1:",
+                  // //       set1.join(""),
+                  // //       ", Set2:",
+                  // //       set2.join(""),
+                  // //       ", Set3:",
+                  // //       set3.join("")
+                  // // );
 
             });
 
@@ -182,14 +193,14 @@ function makeHomePageFromSelectedPlayer(player, players) {
                         challengedId: challengedId,
                   };
                   fetch(
-                              `http://localhost:8080/api/player/${challengerId}/challenge/${challengedId}`, {
-                                    method: "POST",
-                                    headers: {
-                                          "Content-type": "application/json",
-                                    },
-                                    body: JSON.stringify(newChallengeJson),
-                              }
-                        )
+                        `http://localhost:8080/api/player/${challengerId}/challenge/${challengedId}`, {
+                        method: "POST",
+                        headers: {
+                              "Content-type": "application/json",
+                        },
+                        body: JSON.stringify(newChallengeJson),
+                  }
+                  )
                         .then((res) => res.json())
                         .then((newChallenge) => {
                               players.forEach((player) => {

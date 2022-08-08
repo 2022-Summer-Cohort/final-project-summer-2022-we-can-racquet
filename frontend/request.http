@@ -1,0 +1,9 @@
+###
+Get http://localhost:8080/api/player/
+
+###
+POST http://localhost:8080/api/player/1/record/2/
+Content-Type: application/json
+
+[1,2,3,4,5,6]
+

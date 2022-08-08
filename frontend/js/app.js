@@ -3,6 +3,7 @@ import header from "./header.js";
 import login from "./login.js";
 import allPlayersInLeague from "./allPlayersInLeague.js";
 import allPlayerMatches from "./allPlayerMatches.js";
+import allPlayerChallenges from "./allPlayerChallenges.js";
 
 
 const container = document.querySelector(".container");
@@ -64,15 +65,6 @@ function makeLoginPageFromJSON(players) {
       })
 }
 
-// function tempPlayerSelectedWithRecord(player, players, record) {
-
-//       { player.name }
-
-//       // Populate all matches from a single player
-//       container.innerHTML += allPlayerMatches(player, players, record);
-
-// }
-
 function makeHomePageFromSelectedPlayer(player, players) {
 
       // BASE LAYOUT
@@ -81,34 +73,12 @@ function makeHomePageFromSelectedPlayer(player, players) {
       // Populate matching league players table
       container.innerHTML += allPlayersInLeague(player, players);
 
-
-
       // CHALLENGE NOTIFICATION
       fetch(`http://localhost:8080/api/challenge`)
             .then((res) => res.json())
             .then((allChallenges) => {
-                  allChallenges.forEach((challenge) => {
-                        if (challenge.challengedId == player.id) {
-                              players.forEach((onePlayer) => {
-                                    if (onePlayer.id == challenge.challengerId) {
-                                          console.log("You have a challenge from " + onePlayer.name);
-                                    }
-                              });
-                        }
-                  });
+                  container.innerHTML += allPlayerChallenges(player,players,allChallenges);
             });
-
-      // // DISPLAY ALL PLAYER RECORD
-      // fetch(`http://localhost:8080/api/record`)
-      //       .then((res) => res.json())
-      //       .then((allRecords) => {
-      //             allRecords.forEach((record) => {
-      //                   if (player.id == record.winner || player.id == record.loser) {
-      //                         console.log(record);
-      //                         tempPlayerSelectedWithRecord(player, players, record)
-      //                   }
-      //             });
-      //       });
 
       fetch(`http://localhost:8080/api/record`)
             .then((res) => res.json())
@@ -142,7 +112,6 @@ function makeHomePageFromSelectedPlayer(player, players) {
                               const newMatch = [set10, set11, set20, set21, set30, set31];
                               // console.log(challengerId, challengedId, newMatch);
 
-
                               const newRecordJSON = {
                                     winner: challengerId,
                                     loser: challengedId,
@@ -165,42 +134,7 @@ function makeHomePageFromSelectedPlayer(player, players) {
                                                       makeHomePageFromSelectedPlayer(newPlayer, newPlayers)
                                                 }
                                           });
-
-                                          // makeHomePageFromSelectedPlayer(player, players)
-                                          // makeHomeView();
-
-
-
                                     });
-
-
-
-
-                              // // FOR CONSOLE.LOG
-                              // let winner, loser = "";
-                              // // get player names
-                              // players.forEach((player) => {
-                              //       if (player.id == challengerId) {
-                              //             winner = player.name;
-                              //       }
-                              //       if (player.id == challengedId) {
-                              //             loser = player.name;
-                              //       }
-                              // });
-                              // // console.log("Winner:", challengerId, "Loser:", challengedId);
-                              // // console.log("Winner:", winner, "Loser:", loser);
-                              // // const set1 = [set10, "-", set11];
-                              // // const set2 = [set20, "-", set21];
-                              // // const set3 = [set30, "-", set31];
-                              // // console.log(
-                              // //       "Set1:",
-                              // //       set1.join(""),
-                              // //       ", Set2:",
-                              // //       set2.join(""),
-                              // //       ", Set3:",
-                              // //       set3.join("")
-                              // // );
-
                         });
 
                         // CHALLENGE PLAYER BUTTON
@@ -233,7 +167,6 @@ function makeHomePageFromSelectedPlayer(player, players) {
                   homeBtn.addEventListener("click", () => {
                         makeHomeView();
                   });
-
             });
 }
 makeHomeView();

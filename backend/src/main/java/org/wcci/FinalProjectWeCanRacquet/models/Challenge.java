@@ -3,6 +3,9 @@ package org.wcci.FinalProjectWeCanRacquet.models;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.HashSet;
 
 @Entity
 public class Challenge {
@@ -13,6 +16,9 @@ public class Challenge {
 
     private Long challengerId;
     private Long challengedId;
+
+    private HashSet<ArrayList<Long>> challengeSet;
+
 
     public Challenge(Long challengerId, Long challengedId) {
         this.challengerId = challengerId;

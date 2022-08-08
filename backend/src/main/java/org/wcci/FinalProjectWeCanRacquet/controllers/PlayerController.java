@@ -47,6 +47,7 @@ public class PlayerController {
     @PostMapping("/api/player/{challengerId}/challenge/{challengedId}")
     public Challenge addNewChallenge(@PathVariable Long challengerId, @PathVariable Long challengedId){
         Challenge challenge = new Challenge(challengerId,challengedId);
+        // find out if challenge exists
         challengeRepo.save(challenge);
         return challenge;
     }

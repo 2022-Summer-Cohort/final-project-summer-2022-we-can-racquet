@@ -64,6 +64,15 @@ function makeLoginPageFromJSON(players) {
       })
 }
 
+function tempPlayerSelectedWithRecord(player, players, record) {
+
+      {player.name}
+
+      // Populate all matches from a single player
+      container.innerHTML += allPlayerMatches(player, players,record);
+
+}
+
 function makeHomePageFromSelectedPlayer(player, players) {
 
       // BASE LAYOUT
@@ -71,9 +80,6 @@ function makeHomePageFromSelectedPlayer(player, players) {
       container.innerHTML += home(player);
       // Populate matching league players table
       container.innerHTML += allPlayersInLeague(player, players);
-
-      // Populate all matches from a single player
-      container.innerHTML += allPlayerMatches(player, players);
 
       // NAVBAR HOME BUTTON
       const homeBtn = container.querySelector(".home-navigation");
@@ -97,16 +103,17 @@ function makeHomePageFromSelectedPlayer(player, players) {
                   });
             });
 
-            // DISPLAY ALL PLAYER RECORD
-            // fetch(`http://localhost:8080/api/record`)
-            // .then((res) => res.json())
-            // .then((allRecords) => {
-            //       allRecords.forEach((record) => {
-            //             if(player.id == record.winner || player.id == record.loser) {
-            //               console.log(record);
-            //             }
-            //       });
-            // });
+      // DISPLAY ALL PLAYER RECORD
+      fetch(`http://localhost:8080/api/record`)
+            .then((res) => res.json())
+            .then((allRecords) => {
+                  allRecords.forEach((record) => {
+                        if (player.id == record.winner || player.id == record.loser) {
+                              console.log(record);
+                              tempPlayerSelectedWithRecord(player, players, record)
+                        }
+                  });
+            });
 
       // ALL PLAYERS IN LEAGUE TABLE (Challenge, Add record buttons)
       const allPlayersInLeagueRows = container.querySelectorAll(

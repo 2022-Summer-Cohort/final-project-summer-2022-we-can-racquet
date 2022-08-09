@@ -8,7 +8,13 @@ export default function home(player) {
             <p class = "email"> ${player.email}</p>
             <p class = "phone"> ${player.phoneNumber}</p>
             <input type="hidden" class="id_field" value="${player.id}">  
+
+            <button type="button" class="playersInLeagueBtn btn btn-outline-primary">Players in league</button>
+            <button type="button" class="challengesBtn btn btn-outline-primary">Challenges</button>
+            <button type="button" class="recordsBtn btn btn-outline-primary">Records</button>
+
+
         </div>
         `;
-        
-    }
+
+}

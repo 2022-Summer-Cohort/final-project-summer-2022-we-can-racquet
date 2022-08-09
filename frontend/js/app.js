@@ -5,7 +5,6 @@ import allPlayersInLeague from "./allPlayersInLeague.js";
 import allPlayerMatches from "./allPlayerMatches.js";
 import allPlayerChallenges from "./allPlayerChallenges.js";
 
-
 const container = document.querySelector(".container");
 
 function makeHomeView() {
@@ -80,9 +79,7 @@ function makeHomePageFromSelectedPlayer(player, players) {
                   container.innerHTML += allPlayerChallenges(player, players, allChallenges);
 
                   // ALL PLAYERS IN LEAGUE TABLE (Challenge, Add record buttons)
-                  const allPlayersInLeagueRows = container.querySelectorAll(
-                        ".singlePlayerInLeagueRow"
-                  );
+                  const allPlayersInLeagueRows = container.querySelectorAll(".singlePlayerInLeagueRow");
 
                   allPlayersInLeagueRows.forEach((singlePlayerInLeagueRow) => {
                         const challengeBtn = singlePlayerInLeagueRow.querySelector(".challengeBtn");
@@ -161,6 +158,9 @@ function makeHomePageFromSelectedPlayer(player, players) {
                   });
             });
 
+
+      ////////////////////////////////////////////////////////////////////////////////     
+
       fetch(`http://localhost:8080/api/record`)
             .then((res) => res.json())
             .then((allRecords) => {
@@ -172,14 +172,55 @@ function makeHomePageFromSelectedPlayer(player, players) {
                         ".singlePlayerInLeagueRow"
                   );
 
+
+                  // BUTTONS TO HIDE AND DISPLAY TABLES
+                  
+                  // CONSTS FOR DISPLAY TABLES
+                  const allPlayersInLeagueTable = container.querySelector(".allPlayersInLeagueTable");
+                  const allPlayerChallengesTable = container.querySelector(".allPlayerChallengesTable");
+                  const allPlayerMatchesTable = container.querySelector(".allPlayerMatchesTable");
+
+                  const playersInLeagueBtn = container.querySelector(".playersInLeagueBtn");
+                  const challengesBtn = container.querySelector(".challengesBtn");
+                  const recordsBtn = container.querySelector(".recordsBtn");
+
+                  playersInLeagueBtn.addEventListener("click", () => {
+                        allPlayersInLeagueTable.classList.remove("visually-hidden");
+                        playersInLeagueBtn.classList.add('active');
+
+                        allPlayerChallengesTable.classList.add("visually-hidden");
+                        allPlayerMatchesTable.classList.add("visually-hidden");
+                        challengesBtn.classList.remove('active');
+                        recordsBtn.classList.remove('active');
+                  });
+
+                  challengesBtn.addEventListener("click", () => {
+                        allPlayerChallengesTable.classList.remove("visually-hidden");
+                        challengesBtn.classList.add('active');
+                        
+                        allPlayersInLeagueTable.classList.add("visually-hidden");
+                        allPlayerMatchesTable.classList.add("visually-hidden");
+                        recordsBtn.classList.remove('active');
+                        playersInLeagueBtn.classList.remove('active');
+                  });
+
+                  recordsBtn.addEventListener("click", () => {
+                        allPlayerMatchesTable.classList.remove("visually-hidden");
+                        recordsBtn.classList.add('active');
+
+                        allPlayerChallengesTable.classList.add("visually-hidden");
+                        allPlayersInLeagueTable.classList.add("visually-hidden");
+                        challengesBtn.classList.remove('active');
+                        playersInLeagueBtn.classList.remove('active');
+                  });
+
                   allPlayersInLeagueRows.forEach((singlePlayerInLeagueRow) => {
                         const challengeBtn = singlePlayerInLeagueRow.querySelector(".challengeBtn");
                         const addRecordBtn = singlePlayerInLeagueRow.querySelector(".addRecordBtn");
 
                         const challengerId = player.id;
-                        const challengedId =
-                              singlePlayerInLeagueRow.querySelector(".hiddenPlayerId").value;
-
+                        const challengedId = singlePlayerInLeagueRow.querySelector(".hiddenPlayerId").value;
+             
                         // ADD RECORD BUTTON
                         addRecordBtn.addEventListener("click", () => {
                               // get score values from dropdowns
@@ -215,7 +256,7 @@ function makeHomePageFromSelectedPlayer(player, players) {
                                                 }
                                           });
                                     });
-                        });
+                              });
 
                         // CHALLENGE PLAYER BUTTON
                         challengeBtn.addEventListener("click", () => {

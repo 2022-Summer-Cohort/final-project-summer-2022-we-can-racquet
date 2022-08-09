@@ -212,7 +212,9 @@ function makeHomePageFromSelectedPlayer(player, players) {
                         ".singlePlayerInLeagueRow"
                   );
 
-
+                  players.forEach(player => {
+                        // if player.name == challenger.name (classList.add("disabled")) to the button
+                  })
                   // BUTTONS TO HIDE AND DISPLAY TABLES
 
                   // CONSTS FOR DISPLAY TABLES
@@ -224,6 +226,7 @@ function makeHomePageFromSelectedPlayer(player, players) {
                   const challengesBtn = container.querySelector(".challengesBtn");
                   const recordsBtn = container.querySelector(".recordsBtn");
 
+                  // LISTENERS FOR BUTTONS
                   playersInLeagueBtn.addEventListener("click", () => {
                         allPlayersInLeagueTable.classList.remove("visually-hidden");
                         playersInLeagueBtn.classList.add('active');

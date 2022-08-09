@@ -2,11 +2,9 @@ package org.wcci.FinalProjectWeCanRacquet.controllers;
 
 import org.springframework.web.bind.annotation.*;
 import org.wcci.FinalProjectWeCanRacquet.models.Challenge;
-import org.wcci.FinalProjectWeCanRacquet.models.Match;
 import org.wcci.FinalProjectWeCanRacquet.models.Player;
 import org.wcci.FinalProjectWeCanRacquet.models.Record;
 import org.wcci.FinalProjectWeCanRacquet.repos.ChallengeRepository;
-import org.wcci.FinalProjectWeCanRacquet.repos.MatchRepository;
 import org.wcci.FinalProjectWeCanRacquet.repos.PlayerRepository;
 import org.wcci.FinalProjectWeCanRacquet.repos.RecordRepository;
 
@@ -19,13 +17,11 @@ public class PlayerController {
     private PlayerRepository playerRepo;
     private ChallengeRepository challengeRepo;
     private RecordRepository recordRepo;
-    private MatchRepository matchRepo;
-    
-    public PlayerController(PlayerRepository playerRepo, ChallengeRepository challengeRepo, RecordRepository recordRepo, MatchRepository matchRepo) {
+
+    public PlayerController(PlayerRepository playerRepo, ChallengeRepository challengeRepo, RecordRepository recordRepo) {
         this.playerRepo = playerRepo;
         this.challengeRepo = challengeRepo;
         this.recordRepo = recordRepo;
-        this.matchRepo = matchRepo;
     }
 
     @GetMapping("/api/player")
@@ -47,7 +43,16 @@ public class PlayerController {
     @PostMapping("/api/player/{challengerId}/challenge/{challengedId}")
     public Challenge addNewChallenge(@PathVariable Long challengerId, @PathVariable Long challengedId){
         Challenge challenge = new Challenge(challengerId,challengedId);
-        challengeRepo.save(challenge);
+        boolean b = false;
+        for(Challenge tempChallenge : challengeRepo.findAll()) {
+            if (tempChallenge.equals(challenge)) {
+                b = true;
+                break;
+            }
+        }
+        if (b == false) {
+            challengeRepo.save(challenge);
+        }
         return challenge;
     }
 

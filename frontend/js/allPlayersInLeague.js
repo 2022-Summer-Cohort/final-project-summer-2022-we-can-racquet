@@ -3,7 +3,7 @@ export default function allPlayersInLeague(player, players) {
   let playerName = player.name;
 
   return `
-    <div class="allPlayersInLeagueTable">
+    <div class="mt-3 allPlayersInLeagueTable visually-hidden">
 
       <h3>All players in ${leagueToMatch} League</h3>
    
@@ -15,8 +15,8 @@ export default function allPlayersInLeague(player, players) {
 
                   <div class = "row border-bottom border-dark border-opacity-50">
                     <div class = "col">${player.name}</div>
-                    <div class = "challengeBtn btn col">Challenge</div>
-                    <div class = "btn col" data-bs-toggle="modal" data-bs-target="#exampleModal${player.id}">Add Record</div>
+                    <div class = "challengeBtn btn btn-sm col">Challenge</div>
+                    <div class = "btn btn-sm col" data-bs-toggle="modal" data-bs-target="#exampleModal${player.id}">Add Record</div>
                     <input type="hidden" class="hiddenPlayerId" value="${player.id}">
                   </div>
 

@@ -3,14 +3,10 @@ package org.wcci.FinalProjectWeCanRacquet;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import org.wcci.FinalProjectWeCanRacquet.models.Match;
 import org.wcci.FinalProjectWeCanRacquet.models.Player;
 import org.wcci.FinalProjectWeCanRacquet.models.Record;
-import org.wcci.FinalProjectWeCanRacquet.models.SetsScore;
-import org.wcci.FinalProjectWeCanRacquet.repos.MatchRepository;
 import org.wcci.FinalProjectWeCanRacquet.repos.PlayerRepository;
 import org.wcci.FinalProjectWeCanRacquet.repos.RecordRepository;
-import org.wcci.FinalProjectWeCanRacquet.repos.SetsRepository;
 
 import javax.persistence.SecondaryTable;
 import java.util.ArrayList;
@@ -20,14 +16,10 @@ import java.util.Arrays;
 public class Populator implements CommandLineRunner {
 
     private PlayerRepository playerRepo;
-    private SetsRepository setsRepo;
-    private MatchRepository matchRepo;
     private RecordRepository recordRepo;
 
-    public Populator(PlayerRepository playerRepo, SetsRepository setsRepo, MatchRepository matchRepo, RecordRepository recordRepo) {
+    public Populator(PlayerRepository playerRepo, RecordRepository recordRepo) {
         this.playerRepo = playerRepo;
-        this.setsRepo = setsRepo;
-        this.matchRepo = matchRepo;
         this.recordRepo = recordRepo;
     }
 

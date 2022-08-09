@@ -11,14 +11,12 @@ export default function allPlayerChallenges(player, players, allChallenges) {
                     <b>Challenger</b>
                 </div>
                 <div class="col">
-                    <i>Challenged</i>
-                </div>
-                <div class="col">
                 </div>
             </div>
 
         ${allChallenges.map((challenge) => {
-            if(thisPlayerId == challenge.challengedId || thisPlayerId == challenge.challengerId){
+            if(thisPlayerId == challenge.challengedId){
+            // if(thisPlayerId == challenge.challengedId || thisPlayerId == challenge.challengerId){
                 players.forEach(player => {
                     if(challenge.challengedId == player.id){
                         challengedName = player.name;
@@ -30,15 +28,15 @@ export default function allPlayerChallenges(player, players, allChallenges) {
      
 
                 return`
-                    <div class = "challengeRow row"> 
+                    <div class = "challengeRow row mb-2"> 
                         <div class = "col">
                             ${challengerName}
                         </div>
-                        <div class = "col">
-                            ${challengedName}
-                        </div>
                         <div class = "col mb-1">
                             <button type="button" class="acceptChallengeBtn btn btn-sm btn-outline-secondary">Accept</button> 
+                        </div>
+                        <div class = "col mb-1">
+                            <button type="button" class=" btn btn-sm btn-outline-danger">Decline</button> 
                         </div>
 
                         <input type="hidden" class="hiddenChallengerName" value="${challengerName}">

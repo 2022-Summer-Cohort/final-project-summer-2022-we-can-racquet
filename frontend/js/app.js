@@ -121,6 +121,24 @@ function makeHomePageFromSelectedPlayer(player, players) {
                   // ALL PLAYERS IN LEAGUE TABLE (Challenge, Add record buttons)
                   const allPlayersInLeagueRows = container.querySelectorAll(".singlePlayerInLeagueRow");
 
+
+                  
+                  const allChallengeRows = container.querySelectorAll(".challengeRow");
+                  allChallengeRows.forEach((challengeRow) => {
+                        const challengeId = challengeRow.querySelector(".hiddenChallengeId");
+                        const challengerId = challengeRow.querySelector(".hiddenChallengerId");
+                        const declineChallengeBtn = challengeRow.querySelector(".declineChallengeBtn");
+                        declineChallengeBtn.addEventListener("click", () => {
+                              fetch(`http://localhost:8080/api/${challengeId.value}/deleteChallenge`, {
+                                    method: 'DELETE'
+                              })
+                              .then(res => res.json())
+                              .then((newPlayers) => {
+                                    makeHomePageFromSelectedPlayer(player,newPlayers);
+                              });
+                        })
+                  })
+
                   allPlayersInLeagueRows.forEach((singlePlayerInLeagueRow) => {
                         const challengeBtn = singlePlayerInLeagueRow.querySelector(".challengeBtn");
                         const addRecordBtn = singlePlayerInLeagueRow.querySelector(".addRecordBtn");
@@ -190,6 +208,9 @@ function makeHomePageFromSelectedPlayer(player, players) {
                                           });
                                     });
                         });
+
+
+
                   });
                   // NAVBAR HOME BUTTON
                   const homeBtn = container.querySelector(".home-navigation");
@@ -212,9 +233,7 @@ function makeHomePageFromSelectedPlayer(player, players) {
                         ".singlePlayerInLeagueRow"
                   );
 
-                  players.forEach(player => {
-                        // if player.name == challenger.name (classList.add("disabled")) to the button
-                  })
+                  
                   // BUTTONS TO HIDE AND DISPLAY TABLES
 
                   // CONSTS FOR DISPLAY TABLES
@@ -256,6 +275,23 @@ function makeHomePageFromSelectedPlayer(player, players) {
                         challengesBtn.classList.remove('active');
                         playersInLeagueBtn.classList.remove('active');
                   });
+
+                  
+                  const allChallengeRows = container.querySelectorAll(".challengeRow");
+                  allChallengeRows.forEach((challengeRow) => {
+                        const challengeId = challengeRow.querySelector(".hiddenChallengeId");
+                        const challengerId = challengeRow.querySelector(".hiddenChallengerId");
+                        const declineChallengeBtn = challengeRow.querySelector(".declineChallengeBtn");
+                        declineChallengeBtn.addEventListener("click", () => {
+                              fetch(`http://localhost:8080/api/${challengeId.value}/deleteChallenge`, {
+                                    method: 'DELETE'
+                              })
+                              .then(res => res.json())
+                              .then((newPlayers) => {
+                                    makeHomePageFromSelectedPlayer(player,newPlayers);
+                              });
+                        })
+                  })
 
                   allPlayersInLeagueRows.forEach((singlePlayerInLeagueRow) => {
                         const challengeBtn = singlePlayerInLeagueRow.querySelector(".challengeBtn");
@@ -325,6 +361,9 @@ function makeHomePageFromSelectedPlayer(player, players) {
                                           });
                                     });
                         });
+
+
+
                   });
                   // NAVBAR HOME BUTTON
                   const homeBtn = container.querySelector(".home-navigation");

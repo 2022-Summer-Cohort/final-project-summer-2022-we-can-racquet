@@ -36,10 +36,12 @@ export default function allPlayerChallenges(player, players, allChallenges) {
                             <button type="button" class="acceptChallengeBtn btn btn-sm btn-outline-secondary">Accept</button> 
                         </div>
                         <div class = "col mb-1">
-                            <button type="button" class=" btn btn-sm btn-outline-danger">Decline</button> 
+                            <button type="button" class="declineChallengeBtn btn btn-sm btn-outline-danger">Decline</button> 
                         </div>
 
                         <input type="hidden" class="hiddenChallengerName" value="${challengerName}">
+                        <input type="hidden" class="hiddenChallengeId" value="${challenge.id}">
+                        <input type="hidden" class="hiddenChallengerId" value="${thisPlayerId}">
                         <input type="hidden" class="hiddenChallengedName" value="${challengedName}">
 
                     </div>

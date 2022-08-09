@@ -23,6 +23,7 @@ export default function allPlayerChallenges(player, players, allChallenges) {
                     } 
                     if(challenge.challengerId == player.id){
                         challengerName = player.name;
+                        
                     }
                 });
      
@@ -41,8 +42,9 @@ export default function allPlayerChallenges(player, players, allChallenges) {
 
                         <input type="hidden" class="hiddenChallengerName" value="${challengerName}">
                         <input type="hidden" class="hiddenChallengeId" value="${challenge.id}">
-                        <input type="hidden" class="hiddenChallengerId" value="${thisPlayerId}">
+                        <input type="hidden" class="hiddenChallengerId" value="${challenge.challengerId}">
                         <input type="hidden" class="hiddenChallengedName" value="${challengedName}">
+                        <input type="hidden" class="hiddenChallengedId" value="${challenge.challengedId}">
 
                     </div>
                 `

@@ -6,6 +6,7 @@ import javax.persistence.Id;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Objects;
 
 @Entity
 public class Challenge {
@@ -17,7 +18,6 @@ public class Challenge {
     private Long challengerId;
     private Long challengedId;
 
-    private HashSet<ArrayList<Long>> challengeSet;
 
 
     public Challenge(Long challengerId, Long challengedId) {
@@ -38,5 +38,18 @@ public class Challenge {
 
     public Long getChallengedId() {
         return challengedId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Challenge challenge = (Challenge) o;
+        return Objects.equals(challengerId, challenge.challengerId) && Objects.equals(challengedId, challenge.challengedId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(challengerId, challengedId);
     }
 }

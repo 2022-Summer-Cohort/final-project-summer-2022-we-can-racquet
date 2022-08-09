@@ -50,12 +50,12 @@ function makeLoginPageFromJSON(players) {
             }
             console.log(newPlayerJson);
             fetch(`http://localhost:8080/api/player`, {
-                        method: 'POST',
-                        headers: {
-                              'Content-type': 'application/json'
-                        },
-                        body: JSON.stringify(newPlayerJson)
-                  })
+                  method: 'POST',
+                  headers: {
+                        'Content-type': 'application/json'
+                  },
+                  body: JSON.stringify(newPlayerJson)
+            })
                   .then(res => res.json())
                   .then(newPlayer => {
                         makeHomeView();
@@ -78,6 +78,46 @@ function makeHomePageFromSelectedPlayer(player, players) {
             .then((allChallenges) => {
                   container.innerHTML += allPlayerChallenges(player, players, allChallenges);
 
+                  // BUTTONS TO HIDE AND DISPLAY TABLES
+
+                  // CONSTS FOR DISPLAY TABLES
+                  const allPlayersInLeagueTable = container.querySelector(".allPlayersInLeagueTable");
+                  const allPlayerChallengesTable = container.querySelector(".allPlayerChallengesTable");
+                  const allPlayerMatchesTable = container.querySelector(".allPlayerMatchesTable");
+
+                  const playersInLeagueBtn = container.querySelector(".playersInLeagueBtn");
+                  const challengesBtn = container.querySelector(".challengesBtn");
+                  const recordsBtn = container.querySelector(".recordsBtn");
+
+                  playersInLeagueBtn.addEventListener("click", () => {
+                        allPlayersInLeagueTable.classList.remove("visually-hidden");
+                        playersInLeagueBtn.classList.add('active');
+
+                        allPlayerChallengesTable.classList.add("visually-hidden");
+                        allPlayerMatchesTable.classList.add("visually-hidden");
+                        challengesBtn.classList.remove('active');
+                        recordsBtn.classList.remove('active');
+                  });
+
+                  challengesBtn.addEventListener("click", () => {
+                        allPlayerChallengesTable.classList.remove("visually-hidden");
+                        challengesBtn.classList.add('active');
+
+                        allPlayersInLeagueTable.classList.add("visually-hidden");
+                        allPlayerMatchesTable.classList.add("visually-hidden");
+                        recordsBtn.classList.remove('active');
+                        playersInLeagueBtn.classList.remove('active');
+                  });
+
+                  recordsBtn.addEventListener("click", () => {
+                        allPlayerMatchesTable.classList.remove("visually-hidden");
+                        recordsBtn.classList.add('active');
+
+                        allPlayerChallengesTable.classList.add("visually-hidden");
+                        allPlayersInLeagueTable.classList.add("visually-hidden");
+                        challengesBtn.classList.remove('active');
+                        playersInLeagueBtn.classList.remove('active');
+                  });
                   // ALL PLAYERS IN LEAGUE TABLE (Challenge, Add record buttons)
                   const allPlayersInLeagueRows = container.querySelectorAll(".singlePlayerInLeagueRow");
 
@@ -108,14 +148,14 @@ function makeHomePageFromSelectedPlayer(player, players) {
                                     match: newMatch,
                               };
                               fetch(
-                                          `http://localhost:8080/api/player/${challengerId}/record/${challengedId}`, {
-                                                method: "POST",
-                                                headers: {
-                                                      "Content-type": "application/json",
-                                                },
-                                                body: JSON.stringify(newMatch),
-                                          }
-                                    )
+                                    `http://localhost:8080/api/player/${challengerId}/record/${challengedId}`, {
+                                    method: "POST",
+                                    headers: {
+                                          "Content-type": "application/json",
+                                    },
+                                    body: JSON.stringify(newMatch),
+                              }
+                              )
                                     .then((res) => res.json())
                                     .then((newPlayers) => {
                                           newPlayers.forEach((newPlayer) => {
@@ -133,14 +173,14 @@ function makeHomePageFromSelectedPlayer(player, players) {
                                     challengedId: challengedId,
                               };
                               fetch(
-                                          `http://localhost:8080/api/player/${challengerId}/challenge/${challengedId}`, {
-                                                method: "POST",
-                                                headers: {
-                                                      "Content-type": "application/json",
-                                                },
-                                                body: JSON.stringify(newChallengeJson),
-                                          }
-                                    )
+                                    `http://localhost:8080/api/player/${challengerId}/challenge/${challengedId}`, {
+                                    method: "POST",
+                                    headers: {
+                                          "Content-type": "application/json",
+                                    },
+                                    body: JSON.stringify(newChallengeJson),
+                              }
+                              )
                                     .then((res) => res.json())
                                     .then((newChallenge) => {
                                           players.forEach((player) => {
@@ -174,7 +214,7 @@ function makeHomePageFromSelectedPlayer(player, players) {
 
 
                   // BUTTONS TO HIDE AND DISPLAY TABLES
-                  
+
                   // CONSTS FOR DISPLAY TABLES
                   const allPlayersInLeagueTable = container.querySelector(".allPlayersInLeagueTable");
                   const allPlayerChallengesTable = container.querySelector(".allPlayerChallengesTable");
@@ -197,7 +237,7 @@ function makeHomePageFromSelectedPlayer(player, players) {
                   challengesBtn.addEventListener("click", () => {
                         allPlayerChallengesTable.classList.remove("visually-hidden");
                         challengesBtn.classList.add('active');
-                        
+
                         allPlayersInLeagueTable.classList.add("visually-hidden");
                         allPlayerMatchesTable.classList.add("visually-hidden");
                         recordsBtn.classList.remove('active');
@@ -220,7 +260,7 @@ function makeHomePageFromSelectedPlayer(player, players) {
 
                         const challengerId = player.id;
                         const challengedId = singlePlayerInLeagueRow.querySelector(".hiddenPlayerId").value;
-             
+
                         // ADD RECORD BUTTON
                         addRecordBtn.addEventListener("click", () => {
                               // get score values from dropdowns
@@ -240,14 +280,14 @@ function makeHomePageFromSelectedPlayer(player, players) {
                                     match: newMatch,
                               };
                               fetch(
-                                          `http://localhost:8080/api/player/${challengerId}/record/${challengedId}`, {
-                                                method: "POST",
-                                                headers: {
-                                                      "Content-type": "application/json",
-                                                },
-                                                body: JSON.stringify(newMatch),
-                                          }
-                                    )
+                                    `http://localhost:8080/api/player/${challengerId}/record/${challengedId}`, {
+                                    method: "POST",
+                                    headers: {
+                                          "Content-type": "application/json",
+                                    },
+                                    body: JSON.stringify(newMatch),
+                              }
+                              )
                                     .then((res) => res.json())
                                     .then((newPlayers) => {
                                           newPlayers.forEach((newPlayer) => {
@@ -256,7 +296,7 @@ function makeHomePageFromSelectedPlayer(player, players) {
                                                 }
                                           });
                                     });
-                              });
+                        });
 
                         // CHALLENGE PLAYER BUTTON
                         challengeBtn.addEventListener("click", () => {
@@ -265,14 +305,14 @@ function makeHomePageFromSelectedPlayer(player, players) {
                                     challengedId: challengedId,
                               };
                               fetch(
-                                          `http://localhost:8080/api/player/${challengerId}/challenge/${challengedId}`, {
-                                                method: "POST",
-                                                headers: {
-                                                      "Content-type": "application/json",
-                                                },
-                                                body: JSON.stringify(newChallengeJson),
-                                          }
-                                    )
+                                    `http://localhost:8080/api/player/${challengerId}/challenge/${challengedId}`, {
+                                    method: "POST",
+                                    headers: {
+                                          "Content-type": "application/json",
+                                    },
+                                    body: JSON.stringify(newChallengeJson),
+                              }
+                              )
                                     .then((res) => res.json())
                                     .then((newChallenge) => {
                                           players.forEach((player) => {

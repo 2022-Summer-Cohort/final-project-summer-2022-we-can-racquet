@@ -5,7 +5,7 @@
 export default function login(players) {
     return `
 
-        <div class = "row loginLogoContainer">
+        <div class = "row loginLogoContainer"> 
             <div class = "col">
                 <img class="loginLogo" src="./img/login_logo.png" alt="WeCanRacquet Logo" srcset="">
             </div>

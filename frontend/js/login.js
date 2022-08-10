@@ -6,7 +6,7 @@ export default function login(players) {
     return `
         <img class="loginLogo" src="./img/login_logo.png" alt="" srcset="">
 
-        <select class="form-select playerNameSelected" required>
+        <select class="form-select playerNameSelected form-select-lg mb-3" required>
         <option selected disabled>Player name</option>
             ${players.map((player) => {
               return `
@@ -15,9 +15,17 @@ export default function login(players) {
             })}
         </select>
 
-        <button type="button" class="submitBtn btn btn-outline-primary">Submit</button>
+        <div class = "row">
+            <div class = "col">
+                <button type="button" class="btn-lg submitBtn btn btn-outline-primary">Submit</button>
+            </div>
+        </div>
 
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@fat">New Player</button>
+        <div class = "row">
+            <div class = "col">
+                <button type="button" class="btn-lg btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@fat">New Player</button>
+            </div>
+        </div>
 
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">

@@ -56,6 +56,12 @@ public class PlayerController {
         return challenge;
     }
 
+    @DeleteMapping("/api/{id}/deleteChallenge")
+    public Iterable<Player> deleteChallenge(@PathVariable Long id) {
+        challengeRepo.deleteById(id);
+        return playerRepo.findAll();
+    }
+
     @GetMapping("/api/challenge")
     public Iterable<Challenge> showAllChallenges() {
         return challengeRepo.findAll();

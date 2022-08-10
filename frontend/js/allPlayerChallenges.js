@@ -38,7 +38,7 @@ export default function allPlayerChallenges(player, players, allChallenges) {
                             <button type="button" 
                                 data-bs-toggle="modal" 
                                 data-bs-target="#acceptChallengeBtn${challenge.challengerId}" 
-                                class="btn btn-sm btn-outline-secondary acceptChallengeBtn">
+                                class="btn btn-sm btn-outline-success acceptChallengeBtn">
                                 Accept
                             </button> 
                         </div>

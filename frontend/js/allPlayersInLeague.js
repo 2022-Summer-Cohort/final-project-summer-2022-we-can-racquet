@@ -6,6 +6,14 @@ export default function allPlayersInLeague(player, players) {
     <div class="mt-3 allPlayersInLeagueTable visually-hidden">
 
       <h3>All players in ${leagueToMatch} League</h3>
+
+        <div class="row mb-2">
+            <div class="col">
+                <b>Player</b>
+            </div>
+            <div class="col">
+            </div>
+        </div>
    
       ${players
         .map((player) => {
@@ -13,11 +21,26 @@ export default function allPlayersInLeague(player, players) {
             return `
                 <div class = "singlePlayerInLeagueRow">
 
-                  <div class = "row border-bottom border-dark border-opacity-50">
-                    <div class = "col">${player.name}</div>
-                    <div class = "challengeBtn btn btn-sm col">Challenge</div>
-                    <div class = "btn btn-sm col" data-bs-toggle="modal" data-bs-target="#exampleModal${player.id}">Add Record</div>
+                  <div class = "row mb-2">
+
+                    <div class = "col mb-1">
+                      ${player.name}
+                    </div>
+
+                    <div class = "col">
+                      <button type="button" class="btn-warning challengeBtn btn btn-sm col">
+                        Challenge 
+                      </button> 
+                    </div>
+                      
+                    <div class = "col">
+                      <button type="button" class="btn-danger btn btn-sm col" data-bs-toggle="modal" data-bs-target="#exampleModal${player.id}">
+                        Add Record
+                      </button> 
+                    </div>
+
                     <input type="hidden" class="hiddenPlayerId" value="${player.id}">
+
                   </div>
 
                   <div class="modal fade" id="exampleModal${player.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -4,20 +4,36 @@
 
 export default function login(players) {
     return `
-        <img class="loginLogo" src="./img/login_logo.png" alt="" srcset="">
+        <div class = "row loginLogoContainer"> 
+            <div class = "col">
+                <img class="loginLogo" src="./img/login_logo.png" alt="WeCanRacquet Logo" srcset="">
+            </div>
+        </div>
 
-        <select class="form-select playerNameSelected" required>
-        <option selected disabled>Player name</option>
-            ${players.map((player) => {
-              return `
-                    <option value=${player.id}>${player.name}</option>
-                `;
-            })}
+        <select class="form-select playerNameSelected form-select-lg mb-3" required>
+            <option selected disabled>Player name</option>
+                ${players.map((player) => {
+                return `
+                        <option value=${player.id}>${player.name}</option>
+                    `;
+                })}
         </select>
 
-        <button type="button" class="submitBtn btn btn-outline-primary">Submit</button>
-
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@fat">New Player</button>
+        <div class = "row">
+            <div class = "d-grid gap-2">
+                <button type="button" class="mb-5 btn-lg submitBtn btn btn-outline-primary">
+                    Submit
+                </button>
+            </div>
+        </div>
+ 
+        <div class = "row">
+            <div class = "d-grid gap-2 justify-content-end ">
+                <button type="button" class="mb-2 btn-lg btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    New Player
+                </button>
+            </div>
+        </div>
 
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">

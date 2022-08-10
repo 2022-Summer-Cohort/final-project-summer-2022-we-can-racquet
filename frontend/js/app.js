@@ -34,33 +34,31 @@ function makeLoginPageFromJSON(players) {
       })
 
       // NEW PLAYER BUTTON (create new player)
-      // get button div 
       const newPlayerBtn = container.querySelector(".newPlayerBtn");
-      // get form values
-      const newPlayerName = container.querySelector("#new-player-name").value;
-      const newPlayerEmail = container.querySelector("#new-player-email").value;
-      const newPlayerPhoneNumber = container.querySelector("#new-player-phoneNumber").value;
+
+      const newPlayerName = container.querySelector("#player-name");
+      const newPlayerEmail = container.querySelector("#player-email");
+      const newPlayerPhoneNumber = container.querySelector("#player-phoneNumber");
 
       newPlayerBtn.addEventListener("click", () => {
             const newPlayerJson = {
-                  "name": newPlayerName,
+                  "name": newPlayerName.value,
                   "email": newPlayerEmail.value,
-                  "phoneNumber": newPlayerPhoneNumber,
+                  "phoneNumber": newPlayerPhoneNumber.value,
                   "league": "3.0",
                   "imgUrl": "www.yeah.com",
             }
             console.log(newPlayerJson);
             fetch(`http://localhost:8080/api/player`, {
-                  method: 'POST',
-                  headers: {
-                        'Content-type': 'application/json'
-                  },
-                  body: JSON.stringify(newPlayerJson)
-            })
+                        method: 'POST',
+                        headers: {
+                              'Content-type': 'application/json'
+                        },
+                        body: JSON.stringify(newPlayerJson)
+                  })
                   .then(res => res.json())
                   .then(newPlayer => {
                         makeHomeView();
-                        // TODO: Create toast notification on success
                   })
       })
 }
@@ -128,7 +126,7 @@ function makeHomePageFromSelectedPlayer(player, players) {
                         const challengeId = challengeRow.querySelector(".hiddenChallengeId");
                         const challengerId = challengeRow.querySelector(".hiddenChallengerId").value;
                         const declineChallengeBtn = challengeRow.querySelector(".declineChallengeBtn");
-                        const acceptChallengeBtn = challengeRow.querySelector(".acceptChallengeBtn");
+                        // const acceptChallengeBtn = challengeRow.querySelector(".acceptChallengeBtn");
 
                         declineChallengeBtn.addEventListener("click", () => {
                               fetch(`http://localhost:8080/api/${challengeId.value}/deleteChallenge`, {
@@ -139,10 +137,13 @@ function makeHomePageFromSelectedPlayer(player, players) {
                                     makeHomePageFromSelectedPlayer(player,newPlayers);
                               });
                         })
+                        
+                        // acceptChallengeBtn.addEventListener("click", () => {
+                        //       // makeHomePageFromSelectedPlayer(player, players);
+                        //       console.log("")
 
-                        acceptChallengeBtn.addEventListener("click", () => {
-                              container.innerHTML = acceptChallenge(challengerId,players);
-                        })
+                        //       // container.innerHTML += acceptChallenge(challengerId, players);
+                        // })
                   })
 
 
@@ -285,28 +286,31 @@ function makeHomePageFromSelectedPlayer(player, players) {
                   });
 
                   
-                  //ACCEPT/DECLINE CHALLENGE BUTTON
-                  const allChallengeRows = container.querySelectorAll(".challengeRow");
-                  allChallengeRows.forEach((challengeRow) => {
-                        const challengeId = challengeRow.querySelector(".hiddenChallengeId");
-                        const challengerId = challengeRow.querySelector(".hiddenChallengerId").value;
-                        const declineChallengeBtn = challengeRow.querySelector(".declineChallengeBtn");
-                        const acceptChallengeBtn = challengeRow.querySelector(".acceptChallengeBtn");
+                    //ACCEPT/DECLINE CHALLENGE BUTTON
+                    const allChallengeRows = container.querySelectorAll(".challengeRow");
+                    allChallengeRows.forEach((challengeRow) => {
+                          const challengeId = challengeRow.querySelector(".hiddenChallengeId");
+                          const challengerId = challengeRow.querySelector(".hiddenChallengerId").value;
+                          const declineChallengeBtn = challengeRow.querySelector(".declineChallengeBtn");
+                          // const acceptChallengeBtn = challengeRow.querySelector(".acceptChallengeBtn");
 
-                        declineChallengeBtn.addEventListener("click", () => {
-                              fetch(`http://localhost:8080/api/${challengeId.value}/deleteChallenge`, {
-                                    method: 'DELETE'
-                              })
-                              .then(res => res.json())
-                              .then((newPlayers) => {
-                                    makeHomePageFromSelectedPlayer(player,newPlayers);
-                              });
-                        })
+                          declineChallengeBtn.addEventListener("click", () => {
+                                fetch(`http://localhost:8080/api/${challengeId.value}/deleteChallenge`, {
+                                            method: 'DELETE'
+                                      })
+                                      .then(res => res.json())
+                                      .then((newPlayers) => {
+                                            makeHomePageFromSelectedPlayer(player, newPlayers);
+                                      });
+                          })
 
-                        acceptChallengeBtn.addEventListener("click", () => {
-                              container.innerHTML = acceptChallenge(challengerId,players);
-                        })
-                  })
+                          // acceptChallengeBtn.addEventListener("click", () => {
+                          //       // makeHomePageFromSelectedPlayer(player, players);
+                          //       console.log("")
+
+                          //       // container.innerHTML += acceptChallenge(challengerId, players);
+                          // })
+                    })
 
                   allPlayersInLeagueRows.forEach((singlePlayerInLeagueRow) => {
                         const challengeBtn = singlePlayerInLeagueRow.querySelector(".challengeBtn");

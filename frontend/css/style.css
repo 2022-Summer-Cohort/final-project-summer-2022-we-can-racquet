@@ -33,15 +33,15 @@
 }
 
 h1, h2, h3, h4, h5, h6, p {
-  font-family: 'Open Sans', sans-serif;
-  /* font-family: 'Roboto', sans-serif; */
+  /* font-family: 'Open Sans', sans-serif; */
+  font-family: 'Roboto', sans-serif;
 }
 .profileLeagueText{
   font-family: 'Rubik Dirt', cursive;
   font-size: 5rem;
   /* float:right; */
   /* font-family: 'Roboto', sans-serif; */
-    -webkit-filter: drop-shadow(5px 5px 5px #b9b8b8);
+  -webkit-filter: drop-shadow(5px 5px 5px #b9b8b8);
   filter: drop-shadow(5px 5px 5px #b9b8b8);
 
 }
@@ -52,3 +52,17 @@ h1, h2, h3, h4, h5, h6, p {
   /* font-family: 'Roboto', sans-serif; */
 }
 
+.singlePlayerInLeagueRow{
+  padding:5px;
+}
+
+.challengeRow{
+  padding:5px;
+}
+.singleMatchRow{
+  padding:5px;
+}
+
+.btn-sm{
+  min-width:90px;
+}

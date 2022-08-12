@@ -30,17 +30,17 @@ public class Populator implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        Player player1 = new Player("Edward Yu","4.0","./img/avatars/01.jpg","ed1@gmail.com","614-867-5309");
+        Player player1 = new Player("Edward Yu","4.0","./img/avatars/1.jpg","ed1@gmail.com","614-867-5309");
         Player player2 = new Player("Anish Ghimire","4.0","./img/avatars/11.jpg","anish@gmail.com","614-552-4515");
-        Player player3 = new Player("Yonas Tadesse", "4.0", "./img/avatars/02.jpg", "yonas@gmail.com", "614-151-5155");
+        Player player3 = new Player("Yonas Tadesse", "4.0", "./img/avatars/2.jpg", "yonas@gmail.com", "614-151-5155");
         Player player4 = new Player("Abdulkerim Mohammed", "4.0", "./img/avatars/12.jpg", "abdulm@gmail.com", "614-555-6511");
 
-        Player player5 = new Player("Rickie Kidwell", "3.0", "./img/avatars/03.jpg", "rick@gmail.com", "715-155-6666");
+        Player player5 = new Player("Rickie Kidwell", "3.0", "./img/avatars/3.jpg", "rick@gmail.com", "715-155-6666");
         Player player6 = new Player("Pedro Barbosa", "3.0", "./img/avatars/13.jpg", "operaMan@gmail.com", "321-455-7793");
         Player player7 = new Player("Arlene Aulisio", "3.0", "./img/avatars/04.jpg", "watchingYou@gmail.com", "164-515-6666");
 
         Player player8 = new Player("Lok Acharya", "3.5", "./img/avatars/14.jpg", "Lok@gmail.com", "666-564-7498");
-        Player player9 = new Player("Abdulrizaq Ali", "3.5", "./img/avatars/05.jpg", "abdulali@gmail.com", "155-511-5555");
+        Player player9 = new Player("Abdulrizaq Ali", "3.5", "./img/avatars/5.jpg", "abdulali@gmail.com", "155-511-5555");
         Player player10 = new Player("Jordan Gilpin", "3.5", "./img/avatars/15.jpg", "JG@gmail.com", "123-444-5647");
         playerRepo.save(player1);
         playerRepo.save(player2);
@@ -100,7 +100,7 @@ public class Populator implements CommandLineRunner {
         Challenge challenge14 = new Challenge(2L, 1L);
         Challenge challenge15 = new Challenge(3L, 1L);
         Challenge challenge16 = new Challenge(4L, 1L);
-        Challenge challenge17 = new Challenge(1L, 2L);
+        Challenge challenge17 = new Challenge(1L, 4L);
         Challenge challenge18 = new Challenge(3L, 2L);
         Challenge challenge19 = new Challenge(4L, 2L);
         challengeRepo.save(challenge1);

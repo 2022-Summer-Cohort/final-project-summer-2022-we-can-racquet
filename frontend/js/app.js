@@ -46,6 +46,8 @@ function makeLoginPageFromJSON(players) {
       const newPlayerName = container.querySelector("#player-name");
       const newPlayerEmail = container.querySelector("#player-email");
       const newPlayerPhoneNumber = container.querySelector("#player-phoneNumber");
+      let randomNumber = Math.floor(Math.random() * 21)
+      let imgUrl = "./img/avatars/";
 
       newPlayerBtn.addEventListener("click", () => {
             const newPlayerJson = {
@@ -53,20 +55,25 @@ function makeLoginPageFromJSON(players) {
                   "email": newPlayerEmail.value,
                   "phoneNumber": newPlayerPhoneNumber.value,
                   "league": "3.0",
-                  "imgUrl": "www.yeah.com",
+                  "avatarUrl": imgUrl.concat(randomNumber, ".jpg"),
             }
-            console.log(newPlayerJson);
-            fetch(`http://localhost:8080/api/player`, {
-                        method: 'POST',
-                        headers: {
-                              'Content-type': 'application/json'
-                        },
-                        body: JSON.stringify(newPlayerJson)
-                  })
-                  .then(res => res.json())
-                  .then(newPlayer => {
-                        makeHomeView();
-                  })
+            if(!newPlayerJson.name == "" && !newPlayerJson.email == "" && !newPlayerJson.phoneNumber == ""){
+                  fetch(`http://localhost:8080/api/player`, {
+                              method: 'POST',
+                              headers: {
+                                    'Content-type': 'application/json'
+                              },
+                              body: JSON.stringify(newPlayerJson)
+                        })
+                        .then(res => res.json())
+                        .then(newPlayer => {
+                              console.log(newPlayerJson.name, "created!")
+                              makeHomeView();
+                        })
+            } else {
+                  console.log(newPlayerJson.imgUrl)
+                  console.log("Fill out all the fields please!")
+            }
       })
 }
 

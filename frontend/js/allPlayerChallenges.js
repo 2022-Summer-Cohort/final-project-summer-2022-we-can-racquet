@@ -5,8 +5,8 @@ export default function allPlayerChallenges(player, players, allChallenges) {
     
     return `
     <div class = "mt-3 allPlayerChallengesTable visually-hidden">
-        <h3>All Challenges</h3>
-            <div class="row mb-2">
+        <h3 class="text-center">All Challenges</h3>
+            <div class="row mb-2 border-bottom">
                 <div class="col">
                     <b>Challenger</b>
                 </div>
@@ -29,8 +29,8 @@ export default function allPlayerChallenges(player, players, allChallenges) {
                 });
      
                 return`
-                    <div class = "challengeRow row mb-2"> 
-                        <div class = "col">
+                    <div class = "challengeRow row mb-4"> 
+                        <div class = "col-5">
                             ${challengerName}
                         </div>
 
@@ -70,13 +70,13 @@ export default function allPlayerChallenges(player, players, allChallenges) {
                                 </div>
                                 <div class="mb-3">
                                     <label for="message-text" class="col-form-label">Message:</label>
-                                    <textarea class="form-control" id="message-text"></textarea>
+                                    <textarea class="form-control" id="message-text" rows="5">Hey ${challengerName}, this is ${thisPlayer} from the ${player.league} league! \n\nLet's get ready to rumble!</textarea>
                                 </div>
                                 </form>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Send message</button>
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Send message</button>
                             </div>
                             </div>
                         </div>

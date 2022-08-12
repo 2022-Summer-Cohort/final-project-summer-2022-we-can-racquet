@@ -29,7 +29,14 @@ function makeLoginPageFromJSON(players) {
             fetch(`http://localhost:8080/api/player/${selectedPlayer.value}`)
                   .then(res => res.json())
                   .then(onePlayer => {
-                        makeHomePageFromSelectedPlayer(onePlayer, players);
+
+                        if (onePlayer.name === undefined) {
+                              // alert("Select a valid player!")
+                              console.log("Select a valid player!")
+                        } else {
+                              makeHomePageFromSelectedPlayer(onePlayer, players);
+                        }
+
                   })
       })
 
@@ -119,7 +126,7 @@ function makeHomePageFromSelectedPlayer(player, players) {
                   });
                   // ALL PLAYERS IN LEAGUE TABLE (Challenge, Add record buttons)
                   const allPlayersInLeagueRows = container.querySelectorAll(".singlePlayerInLeagueRow");
-                  
+
                   //ACCEPT/DECLINE CHALLENGE BUTTON
                   const allChallengeRows = container.querySelectorAll(".challengeRow");
                   allChallengeRows.forEach((challengeRow) => {
@@ -130,14 +137,14 @@ function makeHomePageFromSelectedPlayer(player, players) {
 
                         declineChallengeBtn.addEventListener("click", () => {
                               fetch(`http://localhost:8080/api/${challengeId.value}/deleteChallenge`, {
-                                    method: 'DELETE'
-                              })
-                              .then(res => res.json())
-                              .then((newPlayers) => {
-                                    makeHomePageFromSelectedPlayer(player,newPlayers);
-                              });
+                                          method: 'DELETE'
+                                    })
+                                    .then(res => res.json())
+                                    .then((newPlayers) => {
+                                          makeHomePageFromSelectedPlayer(player, newPlayers);
+                                    });
                         })
-                        
+
                         // acceptChallengeBtn.addEventListener("click", () => {
                         //       // makeHomePageFromSelectedPlayer(player, players);
                         //       console.log("")
@@ -175,14 +182,14 @@ function makeHomePageFromSelectedPlayer(player, players) {
                                     match: newMatch,
                               };
                               fetch(
-                                    `http://localhost:8080/api/player/${challengerId}/record/${challengedId}`, {
-                                    method: "POST",
-                                    headers: {
-                                          "Content-type": "application/json",
-                                    },
-                                    body: JSON.stringify(newMatch),
-                              }
-                              )
+                                          `http://localhost:8080/api/player/${challengerId}/record/${challengedId}`, {
+                                                method: "POST",
+                                                headers: {
+                                                      "Content-type": "application/json",
+                                                },
+                                                body: JSON.stringify(newMatch),
+                                          }
+                                    )
                                     .then((res) => res.json())
                                     .then((newPlayers) => {
                                           newPlayers.forEach((newPlayer) => {
@@ -200,14 +207,14 @@ function makeHomePageFromSelectedPlayer(player, players) {
                                     challengedId: challengedId,
                               };
                               fetch(
-                                    `http://localhost:8080/api/player/${challengerId}/challenge/${challengedId}`, {
-                                    method: "POST",
-                                    headers: {
-                                          "Content-type": "application/json",
-                                    },
-                                    body: JSON.stringify(newChallengeJson),
-                              }
-                              )
+                                          `http://localhost:8080/api/player/${challengerId}/challenge/${challengedId}`, {
+                                                method: "POST",
+                                                headers: {
+                                                      "Content-type": "application/json",
+                                                },
+                                                body: JSON.stringify(newChallengeJson),
+                                          }
+                                    )
                                     .then((res) => res.json())
                                     .then((newChallenge) => {
                                           players.forEach((player) => {
@@ -242,7 +249,7 @@ function makeHomePageFromSelectedPlayer(player, players) {
                         ".singlePlayerInLeagueRow"
                   );
 
-                  
+
                   // BUTTONS TO HIDE AND DISPLAY TABLES
 
                   // CONSTS FOR DISPLAY TABLES
@@ -285,32 +292,32 @@ function makeHomePageFromSelectedPlayer(player, players) {
                         playersInLeagueBtn.classList.remove('active');
                   });
 
-                  
-                    //ACCEPT/DECLINE CHALLENGE BUTTON
-                    const allChallengeRows = container.querySelectorAll(".challengeRow");
-                    allChallengeRows.forEach((challengeRow) => {
-                          const challengeId = challengeRow.querySelector(".hiddenChallengeId");
-                          const challengerId = challengeRow.querySelector(".hiddenChallengerId").value;
-                          const declineChallengeBtn = challengeRow.querySelector(".declineChallengeBtn");
-                          // const acceptChallengeBtn = challengeRow.querySelector(".acceptChallengeBtn");
 
-                          declineChallengeBtn.addEventListener("click", () => {
-                                fetch(`http://localhost:8080/api/${challengeId.value}/deleteChallenge`, {
-                                            method: 'DELETE'
-                                      })
-                                      .then(res => res.json())
-                                      .then((newPlayers) => {
-                                            makeHomePageFromSelectedPlayer(player, newPlayers);
-                                      });
-                          })
+                  //ACCEPT/DECLINE CHALLENGE BUTTON
+                  const allChallengeRows = container.querySelectorAll(".challengeRow");
+                  allChallengeRows.forEach((challengeRow) => {
+                        const challengeId = challengeRow.querySelector(".hiddenChallengeId");
+                        const challengerId = challengeRow.querySelector(".hiddenChallengerId").value;
+                        const declineChallengeBtn = challengeRow.querySelector(".declineChallengeBtn");
+                        // const acceptChallengeBtn = challengeRow.querySelector(".acceptChallengeBtn");
 
-                          // acceptChallengeBtn.addEventListener("click", () => {
-                          //       // makeHomePageFromSelectedPlayer(player, players);
-                          //       console.log("")
+                        declineChallengeBtn.addEventListener("click", () => {
+                              fetch(`http://localhost:8080/api/${challengeId.value}/deleteChallenge`, {
+                                          method: 'DELETE'
+                                    })
+                                    .then(res => res.json())
+                                    .then((newPlayers) => {
+                                          makeHomePageFromSelectedPlayer(player, newPlayers);
+                                    });
+                        })
 
-                          //       // container.innerHTML += acceptChallenge(challengerId, players);
-                          // })
-                    })
+                        // acceptChallengeBtn.addEventListener("click", () => {
+                        //       // makeHomePageFromSelectedPlayer(player, players);
+                        //       console.log("")
+
+                        //       // container.innerHTML += acceptChallenge(challengerId, players);
+                        // })
+                  })
 
                   allPlayersInLeagueRows.forEach((singlePlayerInLeagueRow) => {
                         const challengeBtn = singlePlayerInLeagueRow.querySelector(".challengeBtn");
@@ -338,14 +345,14 @@ function makeHomePageFromSelectedPlayer(player, players) {
                                     match: newMatch,
                               };
                               fetch(
-                                    `http://localhost:8080/api/player/${challengerId}/record/${challengedId}`, {
-                                    method: "POST",
-                                    headers: {
-                                          "Content-type": "application/json",
-                                    },
-                                    body: JSON.stringify(newMatch),
-                              }
-                              )
+                                          `http://localhost:8080/api/player/${challengerId}/record/${challengedId}`, {
+                                                method: "POST",
+                                                headers: {
+                                                      "Content-type": "application/json",
+                                                },
+                                                body: JSON.stringify(newMatch),
+                                          }
+                                    )
                                     .then((res) => res.json())
                                     .then((newPlayers) => {
                                           newPlayers.forEach((newPlayer) => {
@@ -363,14 +370,14 @@ function makeHomePageFromSelectedPlayer(player, players) {
                                     challengedId: challengedId,
                               };
                               fetch(
-                                    `http://localhost:8080/api/player/${challengerId}/challenge/${challengedId}`, {
-                                    method: "POST",
-                                    headers: {
-                                          "Content-type": "application/json",
-                                    },
-                                    body: JSON.stringify(newChallengeJson),
-                              }
-                              )
+                                          `http://localhost:8080/api/player/${challengerId}/challenge/${challengedId}`, {
+                                                method: "POST",
+                                                headers: {
+                                                      "Content-type": "application/json",
+                                                },
+                                                body: JSON.stringify(newChallengeJson),
+                                          }
+                                    )
                                     .then((res) => res.json())
                                     .then((newChallenge) => {
                                           players.forEach((player) => {

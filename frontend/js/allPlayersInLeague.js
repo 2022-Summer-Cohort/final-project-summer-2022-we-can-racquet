@@ -5,7 +5,7 @@ export default function allPlayersInLeague(player, players) {
   return `
     <div class="mt-3 allPlayersInLeagueTable visually-hidden">
 
-      <h3>All players in ${leagueToMatch} League</h3>
+      <h3>All players in <span class="profileLeagueTableText">${leagueToMatch}</span> League</h3>
 
         <div class="row mb-2">
             <div class="col">

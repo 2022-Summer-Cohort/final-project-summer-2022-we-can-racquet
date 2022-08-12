@@ -4,13 +4,15 @@
 
 export default function login(players) {
     return `
+    <div class = "container p-3 mt-3"> 
+
         <div class = "row loginLogoContainer"> 
             <div class = "col">
                 <img class="loginLogo" src="./img/login_logo.png" alt="WeCanRacquet Logo" srcset="">
             </div>
         </div>
 
-        <select class="form-select playerNameSelected form-select-lg mb-3" required>
+        <select class="mt-5 form-select playerNameSelected form-select-lg mb-3" required>
             <option selected disabled>Player name</option>
                 ${players.map((player) => {
                 return `
@@ -19,7 +21,7 @@ export default function login(players) {
                 })}
         </select>
 
-        <div class = "row">
+        <div class = "mt-4 row">
             <div class = "d-grid gap-2">
                 <button type="button" class="mb-5 btn-lg submitBtn btn btn-outline-primary">
                     Submit
@@ -64,6 +66,7 @@ export default function login(players) {
                 </div>
             </div>
         </div>
+    </div>
         
     `;
 }

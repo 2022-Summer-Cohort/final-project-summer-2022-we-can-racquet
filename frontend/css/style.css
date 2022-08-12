@@ -27,9 +27,28 @@
   position: relative;
   overflow: hidden;
   border-radius: 50%;
+  margin-top: -20px;
+  -webkit-filter: drop-shadow(5px 5px 5px #222222);
+  filter: drop-shadow(5px 5px 5px #222222);
 }
 
 h1, h2, h3, h4, h5, h6, p {
   font-family: 'Open Sans', sans-serif;
   /* font-family: 'Roboto', sans-serif; */
 }
+.profileLeagueText{
+  font-family: 'Rubik Dirt', cursive;
+  font-size: 5rem;
+  /* float:right; */
+  /* font-family: 'Roboto', sans-serif; */
+    -webkit-filter: drop-shadow(5px 5px 5px #b9b8b8);
+  filter: drop-shadow(5px 5px 5px #b9b8b8);
+
+}
+.profileLeagueTableText{
+  font-family: 'Rubik Dirt', cursive;
+  font-size: 1.8rem;
+  /* float:right; */
+  /* font-family: 'Roboto', sans-serif; */
+}
+

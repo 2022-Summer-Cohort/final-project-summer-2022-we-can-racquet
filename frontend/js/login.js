@@ -1,8 +1,5 @@
-
-// TODO: Submit button on default "Player Name" create undefined player, fix
-// TODO: New Player >> Add Player is allowed when no info filled in, fix
-
 export default function login(players) {
+
     return `
     <div class = "container p-3 mt-3"> 
 
@@ -11,6 +8,26 @@ export default function login(players) {
                 <img class="loginLogo" src="./img/login_logo.png" alt="WeCanRacquet Logo" srcset="">
             </div>
         </div>
+
+
+
+        <div class="introductionText text-center">
+            <div class="row">
+                <p class="display-6">Play competitive tennis!</p>
+            </div>
+            <div class="row">
+                <h6 class="fw-light">Challenge friends, keep score, meet new people!</h6>
+            </div>
+      
+        </div>
+
+
+
+
+
+
+
+
 
         <select class="mt-5 form-select playerNameSelected form-select-lg mb-3" required>
             <option selected disabled>Player name</option>

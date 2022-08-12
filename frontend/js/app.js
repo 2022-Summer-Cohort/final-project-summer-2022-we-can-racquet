@@ -71,7 +71,6 @@ function makeLoginPageFromJSON(players) {
                               makeHomeView();
                         })
             } else {
-                  console.log(newPlayerJson.imgUrl)
                   console.log("Fill out all the fields please!")
             }
       })

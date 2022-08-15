@@ -70,3 +70,18 @@ h1, h2, h3, h4, h5, h6, p {
 .open-sans{
   font-family: 'Open Sans', sans-serif;
 }
+
+.introductionText{
+  /* background-color:#eeeeee; */
+  /* -webkit-filter: drop-shadow(5px 5px 5px #b9b8b8); */
+  /* filter: drop-shadow(5px 5px 5px #b9b8b8); */
+}
+
+#introTextTop{
+  /* background-color: red; */
+  margin-top:2rem;
+}
+#introTextBottom{
+  /* background-color: red; */
+  margin-bottom:2.5rem;
+}

@@ -11,22 +11,15 @@ export default function login(players) {
 
 
 
-        <div class="introductionText text-center">
+        <div class="introductionText text-center border-top border-bottom">
             <div class="row">
-                <p class="display-6">Play competitive tennis!</p>
+                <p class="display-6" id="introTextTop">Play competitive tennis!</p>
             </div>
             <div class="row">
-                <h6 class="fw-light">Challenge friends, keep score, meet new people!</h6>
+                <h6 class="fw-light" id="introTextBottom">Challenge friends, keep score, meet new people!</h6>
             </div>
       
         </div>
-
-
-
-
-
-
-
 
 
         <select class="mt-5 form-select playerNameSelected form-select-lg mb-3" required>

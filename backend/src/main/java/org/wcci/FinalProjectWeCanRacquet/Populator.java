@@ -37,7 +37,7 @@ public class Populator implements CommandLineRunner {
 
         Player player5 = new Player("Rickie Kidwell", "3.0", "./img/avatars/3.jpg", "rick@gmail.com", "715-155-6666");
         Player player6 = new Player("Pedro Barbosa", "3.0", "./img/avatars/13.jpg", "operaMan@gmail.com", "321-455-7793");
-        Player player7 = new Player("Arlene Aulisio", "3.0", "./img/avatars/04.jpg", "watchingYou@gmail.com", "164-515-6666");
+        Player player7 = new Player("Arlene Aulisio", "3.0", "./img/avatars/4.jpg", "watchingYou@gmail.com", "164-515-6666");
 
         Player player8 = new Player("Lok Acharya", "3.5", "./img/avatars/14.jpg", "Lok@gmail.com", "666-564-7498");
         Player player9 = new Player("Abdulrizaq Ali", "3.5", "./img/avatars/5.jpg", "abdulali@gmail.com", "155-511-5555");

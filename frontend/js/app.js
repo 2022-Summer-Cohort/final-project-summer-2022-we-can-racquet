@@ -4,10 +4,17 @@ import login from "./login.js";
 import allPlayersInLeague from "./allPlayersInLeague.js";
 import allPlayerMatches from "./allPlayerMatches.js";
 import allPlayerChallenges from "./allPlayerChallenges.js";
+import navbarAllChallenges from "./allChallenges.js";
+import allMatches from "./allMatches.js";
+
 import acceptChallenge from "./acceptChallenge.js";
 
 const container = document.querySelector(".container");
 
+
+
+
+// Sends PLAYERS to makeLoginPageFromJSON
 function makeHomeView() {
       fetch("http://localhost:8080/api/player")
             .then(res => res.json())
@@ -16,12 +23,12 @@ function makeHomeView() {
             })
 }
 
+// Populates PLAYERS on Login page
 function makeLoginPageFromJSON(players) {
 
       container.innerHTML = login(players);
 
       // SUBMIT BUTTON (select existing player)
-      // get button div 
       const submitBtn = container.querySelector(".submitBtn");
 
       submitBtn.addEventListener("click", () => {
@@ -42,7 +49,6 @@ function makeLoginPageFromJSON(players) {
 
       // NEW PLAYER BUTTON (create new player)
       const newPlayerBtn = container.querySelector(".newPlayerBtn");
-
       const newPlayerName = container.querySelector("#player-name");
       const newPlayerEmail = container.querySelector("#player-email");
       const newPlayerPhoneNumber = container.querySelector("#player-phoneNumber");
@@ -76,12 +82,11 @@ function makeLoginPageFromJSON(players) {
       })
 }
 
+// Create homepage for PLAYER
 function makeHomePageFromSelectedPlayer(player, players) {
 
-      // BASE LAYOUT
       container.innerHTML = header();
       container.innerHTML += home(player);
-      // Populate matching league players table
       container.innerHTML += allPlayersInLeague(player, players);
 
       // CHALLENGE NOTIFICATION
@@ -159,8 +164,6 @@ function makeHomePageFromSelectedPlayer(player, players) {
                         // })
                   })
 
-
-
                   allPlayersInLeagueRows.forEach((singlePlayerInLeagueRow) => {
                         const challengeBtn = singlePlayerInLeagueRow.querySelector(".challengeBtn");
                         const addRecordBtn = singlePlayerInLeagueRow.querySelector(".addRecordBtn");
@@ -180,52 +183,51 @@ function makeHomePageFromSelectedPlayer(player, players) {
                               const set31 = singlePlayerInLeagueRow.querySelector(".select6").value;
 
                               const newMatch = [set10, set11, set20, set21, set30, set31];
-                     // FOR CONSOLE.LOG
-                     let winner, loser = "";
-                     // get player names
-                     players.forEach((player) => {
-                           if (player.id == challengerId) {
-                                 winner = player.name;
-                           }
-                           if (player.id == challengedId) {
-                                 loser = player.name;
-                           }
-                     });
-                     // console.log("Winner:", challengerId, "Loser:", challengedId);
-                     console.log("Winner:", winner, "Loser:", loser);
-                     const set1 = [set10, "-", set11];
-                     const set2 = [set20, "-", set21];
-                     const set3 = [set30, "-", set31];
-                     console.log(
-                           "Set1:",
-                           set1.join(""),
-                           ", Set2:",
-                           set2.join(""),
-                           ", Set3:",
-                           set3.join("")
-                     );
-                              const newRecordJSON = {
-                                    winner: challengerId,
-                                    loser: challengedId,
-                                    match: newMatch,
-                              };
-                              fetch(
-                                    `http://localhost:8080/api/player/${challengerId}/record/${challengedId}`, {
-                                          method: "POST",
-                                          headers: {
-                                                "Content-type": "application/json",
-                                          },
-                                          body: JSON.stringify(newMatch),
-                                    }
-                                    )
-                                    .then((res) => res.json())
-                                    .then((newPlayers) => {
-                                          newPlayers.forEach((newPlayer) => {
-                                                if (newPlayer.id == challengerId) {
-                                                      makeHomePageFromSelectedPlayer(newPlayer, newPlayers)
-                                                }
-                                          });
+                              
+                        // FOR CONSOLE.LOG
+                        let winner, loser = "";
+                        // get player names
+                        players.forEach((player) => {
+                              if (player.id == challengerId) {
+                                    winner = player.name;
+                              }
+                              if (player.id == challengedId) {
+                                    loser = player.name;
+                              }
+                        });
+                        // console.log("Winner:", challengerId, "Loser:", challengedId);
+                        console.log("Winner:", winner, "Loser:", loser);
+                        const set1 = [set10, "-", set11];
+                        const set2 = [set20, "-", set21];
+                        const set3 = [set30, "-", set31];
+                        console.log(
+                              "Set1:",
+                              set1.join(""),
+                              ", Set2:",
+                              set2.join(""),
+                              ", Set3:",
+                              set3.join("")
+                        );
+                        const newRecordJSON = {
+                              winner: challengerId,
+                              loser: challengedId,
+                              match: newMatch,
+                        };
+                        fetch(`http://localhost:8080/api/player/${challengerId}/record/${challengedId}`, {
+                                    method: "POST",
+                                    headers: {
+                                          "Content-type": "application/json",
+                                    },
+                                    body: JSON.stringify(newMatch),
+                              })
+                              .then((res) => res.json())
+                              .then((newPlayers) => {
+                                    newPlayers.forEach((newPlayer) => {
+                                          if (newPlayer.id == challengerId) {
+                                                makeHomePageFromSelectedPlayer(newPlayer, newPlayers)
+                                          }
                                     });
+                              });
                         });
 
                         // CHALLENGE PLAYER BUTTON
@@ -253,14 +255,47 @@ function makeHomePageFromSelectedPlayer(player, players) {
                                     });
                         });
 
-
-
                   });
+                  
                   // NAVBAR HOME BUTTON
                   const homeBtn = container.querySelector(".home-navigation");
                   homeBtn.addEventListener("click", () => {
                         makeHomeView();
                   });
+                  // NAVBAR CHALLENGES BUTTON
+                  const navbarChallengesBtn = container.querySelector(".challenge-navigation");
+                  navbarChallengesBtn.addEventListener("click", () => {
+                        console.log("challenge")
+                        makeChallengesView(players, allChallenges);
+                  });
+                  // NAVBAR MATCHES BUTTON
+                  const navbarRecordsBtn = container.querySelector(".records-navigation");
+                  navbarRecordsBtn.addEventListener("click", () => {
+                        makeRecordsView();
+                  });
+
+                  function makeChallengesView() {
+
+                        container.innerHTML = header();
+                        container.innerHTML += navbarAllChallenges(players);
+                        console.log('top')
+
+                        // NAVBAR HOME BUTTON
+                        const homeBtn = container.querySelector(".home-navigation");
+                        homeBtn.addEventListener("click", () => {
+                              makeHomeView();
+                        });
+                        // NAVBAR MATCHES BUTTON
+                        const navbarRecordsBtn = container.querySelector(".records-navigation");
+                        navbarRecordsBtn.addEventListener("click", () => {
+                              makeRecordsView();
+                        });
+
+                  }
+                        
+
+
+
             });
 
 
@@ -339,12 +374,6 @@ function makeHomePageFromSelectedPlayer(player, players) {
                                     });
                         })
 
-                        // acceptChallengeBtn.addEventListener("click", () => {
-                        //       // makeHomePageFromSelectedPlayer(player, players);
-                        //       console.log("")
-
-                        //       // container.innerHTML += acceptChallenge(challengerId, players);
-                        // })
                   })
 
                   allPlayersInLeagueRows.forEach((singlePlayerInLeagueRow) => {
@@ -443,11 +472,59 @@ function makeHomePageFromSelectedPlayer(player, players) {
 
 
                   });
+
+
                   // NAVBAR HOME BUTTON
                   const homeBtn = container.querySelector(".home-navigation");
                   homeBtn.addEventListener("click", () => {
                         makeHomeView();
                   });
+                  // NAVBAR CHALLENGES BUTTON
+                  const navbarChallengesBtn = container.querySelector(".challenge-navigation");
+                  navbarChallengesBtn.addEventListener("click", () => {
+                        makeChallengesView();
+                  });
+                  // NAVBAR MATCHES BUTTON
+                  const navbarRecordsBtn = container.querySelector(".records-navigation");
+                  navbarRecordsBtn.addEventListener("click", () => {
+                        makeRecordsView();
+                  });
+
+                  function makeChallengesView() {
+
+                        container.innerHTML = header();
+
+                        fetch(`http://localhost:8080/api/challenge`)
+                              .then((res) => res.json())
+                              .then((allChallenges) => {
+                                    container.innerHTML += navbarAllChallenges(players, allChallenges);
+                                    console.log("bot")
+
+                              // NAVBAR HOME BUTTON
+                              const homeBtn = container.querySelector(".home-navigation");
+                              homeBtn.addEventListener("click", () => {
+                                    makeHomeView();
+                              });
+                              // NAVBAR MATCHES BUTTON
+                              const navbarRecordsBtn = container.querySelector(".records-navigation");
+                              navbarRecordsBtn.addEventListener("click", () => {
+                                    makeRecordsView();
+                              });
+
+
+
+
+                              });
+
+                  }
+
+
+
+
+
+
+
+
             });
 }
 makeHomeView();

@@ -29,7 +29,7 @@ public class Populator implements CommandLineRunner {
         Player player1 = new Player("Ed","3.0","https://img.freepik.com/premium-vector/man-character-avatar-icon-tennis-sport_51635-2515.jpg",
                 "ed1@gmail.com","6145524515");
         Player player2 = new Player("Anish","3.0","https://img.freepik.com/premium-vector/man-character-avatar-icon-tennis-sport_51635-2515.jpg",
-                "ed1@gmail.com","6145524515");
+                "anish@gmail.com","6145524515");
         Player player3 = new Player("name3", "3.0", "url", "email", "phoneNumber");
         Player player4 = new Player("name4", "3.0", "url", "email", "phoneNumber");
         Player player5 = new Player("name5", "3.0", "url", "email", "phoneNumber");

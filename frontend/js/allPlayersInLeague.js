@@ -24,7 +24,8 @@ export default function allPlayersInLeague(player, players) {
                   <div class = "row mb-2">
 
                     <div class = "col mb-1">
-                      ${player.name}
+                      <p class = "challengedName">${player.name}</p>
+                      
                     </div>
 
                     <div class = "col">

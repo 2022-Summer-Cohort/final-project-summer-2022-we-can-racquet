@@ -18,7 +18,7 @@ export default function header() {
                         <a class="challenge-navigation nav-link active" aria-current="page" href="#">Challenges</a>
                     </li>
                     <li class="nav-item">
-                        <a class="records-navigation nav-link active" aria-current="page" href="#">Records</a>
+                        <a class="records-navigation nav-link active" aria-current="page" href="#">Matches</a>
                     </li>
  
                 </ul>

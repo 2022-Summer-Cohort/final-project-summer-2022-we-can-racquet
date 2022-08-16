@@ -5,14 +5,9 @@ import allPlayersInLeague from "./allPlayersInLeague.js";
 import allPlayerMatches from "./allPlayerMatches.js";
 import allPlayerChallenges from "./allPlayerChallenges.js";
 import navbarAllChallenges from "./allChallenges.js";
-import allMatches from "./allMatches.js";
-
-import acceptChallenge from "./acceptChallenge.js";
+import navbarAllMatches from "./allMatches.js";
 
 const container = document.querySelector(".container");
-
-
-
 
 // Sends PLAYERS to makeLoginPageFromJSON
 function makeHomeView() {
@@ -274,10 +269,12 @@ function makeHomePageFromSelectedPlayer(player, players) {
                         makeRecordsView();
                   });
 
+
+                  // NOT USED?
                   function makeChallengesView() {
 
                         container.innerHTML = header();
-                        container.innerHTML += navbarAllChallenges(players);
+                        container.innerHTML += navbarAllChallenges(players, allChallenges);
                         console.log('top')
 
                         // NAVBAR HOME BUTTON
@@ -291,6 +288,24 @@ function makeHomePageFromSelectedPlayer(player, players) {
                               makeRecordsView();
                         });
 
+                  }
+
+                  function makeRecordsView(){
+                        container.innerHTML = header();
+                        container.innerHTML += navbarAllMatches(players);
+                        console.log('top')
+
+                        // NAVBAR HOME BUTTON
+                        const homeBtn = container.querySelector(".home-navigation");
+                        homeBtn.addEventListener("click", () => {
+                              makeHomeView();
+                        });
+                        // NAVBAR CHALLENGES BUTTON
+                        const navbarChallengesBtn = container.querySelector(".challenge-navigation");
+                        navbarChallengesBtn.addEventListener("click", () => {
+                              console.log("challenge")
+                              makeChallengesView(players, allChallenges);
+                        });
                   }
                         
 
@@ -510,20 +525,28 @@ function makeHomePageFromSelectedPlayer(player, players) {
                               navbarRecordsBtn.addEventListener("click", () => {
                                     makeRecordsView();
                               });
-
-
-
-
-                              });
+                        });
 
                   }
 
+                  function makeRecordsView() {
 
+                        container.innerHTML = header();
+                        container.innerHTML += navbarAllMatches(players, allRecords);
+                        console.log('bot')
 
-
-
-
-
+                        // NAVBAR HOME BUTTON
+                        const homeBtn = container.querySelector(".home-navigation");
+                        homeBtn.addEventListener("click", () => {
+                              makeHomeView();
+                        });
+                        // NAVBAR CHALLENGES BUTTON
+                        const navbarChallengesBtn = container.querySelector(".challenge-navigation");
+                        navbarChallengesBtn.addEventListener("click", () => {
+                              console.log("challenge")
+                              makeChallengesView();
+                        });
+                  }
 
             });
 }

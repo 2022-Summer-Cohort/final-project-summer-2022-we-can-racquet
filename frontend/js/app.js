@@ -543,7 +543,6 @@ function makeHomePageFromSelectedPlayer(player, players) {
                         // NAVBAR CHALLENGES BUTTON
                         const navbarChallengesBtn = container.querySelector(".challenge-navigation");
                         navbarChallengesBtn.addEventListener("click", () => {
-                              console.log("challenge")
                               makeChallengesView();
                         });
                   }

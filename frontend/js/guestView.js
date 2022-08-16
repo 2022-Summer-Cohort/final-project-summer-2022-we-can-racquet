@@ -17,27 +17,30 @@ export default function guestView(guestPlayerId, players, allChallenges,allRecor
 
     });
 
-
-    let playerAvatar = "";
-    let playerLeague = "";
-    let playerName = "";
-    let playerEmail = "";
-
-
     return `
 
         ${players.map((player) => {
             if (player.id == guestPlayerId) {
                 return `
-                    <img class = "logoRounded" src = ${player.avatarUrl}>
-                    <br>
-                    ${player.league}
-                    <br>
-                    ${player.name}
-                    <br>
-                    ${player.email}
-                    <br>
-                    <h1>Challengers</h1>
+                    <div class = "playerProfile">
+                        <h3 class = "display-2 text-center border-bottom"> Guest view </h3>
+                        <h6 class = "profileLeagueTextGuest"> ${player.league}</h6>
+                        <img class="logoRounded mx-auto d-block" src="${player.avatarUrl}" alt="player avatar">
+               
+                        <div class="row mt-1 text-center">
+                            <div class="col">
+                                <p>${player.email}</p>
+                            </div>
+                        </div>
+                        <div class="row text-center">
+                            <div class="col">
+                                <p>${player.phoneNumber}</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <h1 class="mt-2 text-center border-top">Challengers</h1>
                     ${allChallengesOfGuest.map((challenge) => {
                         tempChallenger = challenge.challengerId;
                         tempChallenged = challenge.challengedId;
@@ -55,14 +58,12 @@ export default function guestView(guestPlayerId, players, allChallenges,allRecor
                             <div class = "allChallengesInGuest">
                                 <p class ="challengesNameGuest">${tempChallengerName}</p> 
                                 <input type="hidden" class="hiddenChallengerGuestId" value="${tempChallengerId}">
-
                             </div>
                         `
                         
                     }).join("")}
 
-                    <br>
-                    <h1>Records</h1>
+                    <h1 class="mt-2 text-center border-top">Records</h1>
                     <div class = "row mb-2">
                         <div class = "col-2">
                             <b>Winner</b>

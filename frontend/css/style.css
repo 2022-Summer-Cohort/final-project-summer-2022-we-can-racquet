@@ -43,7 +43,14 @@ h1, h2, h3, h4, h5, h6, p {
   /* font-family: 'Roboto', sans-serif; */
   -webkit-filter: drop-shadow(5px 5px 5px #b9b8b8);
   filter: drop-shadow(5px 5px 5px #b9b8b8);
-
+}
+.profileLeagueTextGuest{
+  font-family: 'Rubik Dirt', cursive;
+  font-size: 2rem;
+  /* float:right; */
+  /* font-family: 'Roboto', sans-serif; */
+  -webkit-filter: drop-shadow(5px 5px 5px #b9b8b8);
+  filter: drop-shadow(5px 5px 5px #b9b8b8);
 }
 .profileLeagueTableText{
   font-family: 'Rubik Dirt', cursive;

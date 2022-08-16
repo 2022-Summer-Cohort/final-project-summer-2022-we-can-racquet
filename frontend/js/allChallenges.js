@@ -4,12 +4,6 @@ export default function navbarAllChallenges(players, allChallenges) {
     let challengedArray = [];
     let leagueArray = [];
 
-    let challengerId = "";
-    let challengedId = "";
-
-    // console.log(players)
-    // console.log(allChallenges)
-
     return`
         <h1 class="text-center mt-3 mb-5 ">Challenge Feed</h1>
             <div class="row border-bottom">

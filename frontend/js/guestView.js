@@ -18,7 +18,8 @@ export default function guestView(guestPlayerId, players, allChallenges,allRecor
     });
 
     return `
-        
+
+
         ${players.map((player) => {
             if (player.id == guestPlayerId) {
                 return `
@@ -44,10 +45,31 @@ export default function guestView(guestPlayerId, players, allChallenges,allRecor
                             
                         }).join("")}
                         `
-                    }).join("")}
+                    }).join(",")}
 
                     <br>
                     <h1>Records</h1>
+                    <div class = "row mb-2">
+                        <div class = "col-2">
+                            <b>Winner</b>
+                        </div>
+                        <div class = "col-1">
+                        </div>
+                        <div class = "col-2">
+                            <b>Loser</b>
+                        </div>
+                        <div class = "col-1"></div>
+
+                        <div class = "col">
+                            <b>Set 1</b>
+                        </div>
+                        <div class = "col">
+                            <b>Set 2</b>
+                        </div>
+                        <div class = "col">
+                            <b>Set 3</b>
+                        </div>
+                    </div>
                     ${allRecordsOfGuest.map((record) => {
                         tempWinner = record.winner;
                         tempLoser = record.loser;
@@ -61,7 +83,9 @@ export default function guestView(guestPlayerId, players, allChallenges,allRecor
                                 tempLoserName = tempPlayer.name;
                             }
                         })
+                        
                         return`
+
                             <div class="row">
                                 <div class="col-2">
                                    <p>${tempWinnerName}</p>

@@ -120,12 +120,65 @@ function makeGuestViewFromSelectedPlayer(playerId, players, allChallenges, allRe
             });
 
       })
-
+      // NAVBAR MATCHES BUTTON
+      const navbarRecordsBtn = container.querySelector(".records-navigation");
+      navbarRecordsBtn.addEventListener("click", () => {
+            makeRecordsView();
+      });
+      // NAVBAR CHALLENGES BUTTON
+      const navbarChallengesBtn = container.querySelector(".challenge-navigation");
+      navbarChallengesBtn.addEventListener("click", () => {
+            makeChallengesView();
+      });
       // NAVBAR HOME BUTTON
       const homeBtn = container.querySelector(".home-navigation");
       homeBtn.addEventListener("click", () => {
             makeHomeView();
       });
+
+      function makeChallengesView() {
+
+            container.innerHTML = header();
+
+            fetch(`http://localhost:8080/api/challenge`)
+                  .then((res) => res.json())
+                  .then((allChallenges) => {
+                        container.innerHTML += navbarAllChallenges(players, allChallenges);
+
+                        // NAVBAR HOME BUTTON
+                        const homeBtn = container.querySelector(".home-navigation");
+                        homeBtn.addEventListener("click", () => {
+                              makeHomeView();
+                        });
+                        // NAVBAR MATCHES BUTTON
+                        const navbarRecordsBtn = container.querySelector(".records-navigation");
+                        navbarRecordsBtn.addEventListener("click", () => {
+                              makeRecordsView();
+                        });
+                  });
+
+      }
+
+      function makeRecordsView() {
+
+            container.innerHTML = header();
+            container.innerHTML += navbarAllMatches(players, allRecords);
+            console.log('bot')
+
+            // NAVBAR HOME BUTTON
+            const homeBtn = container.querySelector(".home-navigation");
+            homeBtn.addEventListener("click", () => {
+                  makeHomeView();
+            });
+            // NAVBAR CHALLENGES BUTTON
+            const navbarChallengesBtn = container.querySelector(".challenge-navigation");
+            navbarChallengesBtn.addEventListener("click", () => {
+                  makeChallengesView();
+            });
+      }
+
+
+      
 }
 
 function makeHomePageFromSelectedPlayer(player, players) {

@@ -9,7 +9,7 @@ export default function home(player) {
             <div class="row text-center mt-4">
                 <div class="col">
                     <h1 class = "display-2"> ${player.name}</h1>
-                </div>
+                </div> 
       
             </div>
 

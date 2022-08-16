@@ -17,8 +17,14 @@ export default function guestView(guestPlayerId, players, allChallenges,allRecor
 
     });
 
-    return `
 
+    let playerAvatar = "";
+    let playerLeague = "";
+    let playerName = "";
+    let playerEmail = "";
+
+
+    return `
 
         ${players.map((player) => {
             if (player.id == guestPlayerId) {

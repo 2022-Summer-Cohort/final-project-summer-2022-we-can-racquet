@@ -12,7 +12,13 @@ export default function header() {
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
                     <li class="nav-item">
-                        <a class="home-navigation nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="home-navigation nav-link active" aria-current="page" href="#">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="challenge-navigation nav-link active" aria-current="page" href="#">Challenges</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="records-navigation nav-link active" aria-current="page" href="#">Matches</a>
                     </li>
  
                 </ul>

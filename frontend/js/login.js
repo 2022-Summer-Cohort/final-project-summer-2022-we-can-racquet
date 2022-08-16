@@ -1,23 +1,51 @@
-
-// TODO: Submit button on default "Player Name" create undefined player, fix
-// TODO: New Player >> Add Player is allowed when no info filled in, fix
-
 export default function login(players) {
-    return `
-        <img class="loginLogo" src="./img/login_logo.png" alt="" srcset="">
 
-        <select class="form-select playerNameSelected" required>
-        <option selected disabled>Player name</option>
-            ${players.map((player) => {
-              return `
-                    <option value=${player.id}>${player.name}</option>
-                `;
-            })}
+    return `
+    <div class = "container p-3 mt-3"> 
+
+        <div class = "row loginLogoContainer"> 
+            <div class = "col">
+                <img class="loginLogo" src="./img/login_logo.png" alt="WeCanRacquet Logo" srcset="">
+            </div>
+        </div>
+
+
+
+        <div class="introductionText text-center border-top border-bottom">
+            <div class="row">
+                <p class="display-6" id="introTextTop">Play competitive tennis!</p>
+            </div>
+            <div class="row">
+                <h6 class="fw-light" id="introTextBottom">Challenge friends, keep score, meet new people!</h6>
+            </div>
+      
+        </div>
+
+
+        <select class="mt-5 form-select playerNameSelected form-select-lg mb-3" required>
+            <option selected disabled>Player name</option>
+                ${players.map((player) => {
+                return `
+                        <option value=${player.id}>${player.name}</option>
+                    `;
+                })}
         </select>
 
-        <button type="button" class="submitBtn btn btn-outline-primary">Submit</button>
-
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@fat">New Player</button>
+        <div class = "mt-4 row">
+            <div class = "d-grid gap-2">
+                <button type="button" class="mb-5 btn-lg submitBtn btn btn-outline-primary">
+                    Submit
+                </button>
+            </div>
+        </div>
+ 
+        <div class = "row">
+            <div class = "d-grid gap-2 justify-content-end ">
+                <button type="button" class="mb-2 btn-lg btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    New Player
+                </button>
+            </div>
+        </div>
 
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -48,6 +76,7 @@ export default function login(players) {
                 </div>
             </div>
         </div>
+    </div>
         
     `;
 }

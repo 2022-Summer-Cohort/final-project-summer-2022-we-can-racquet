@@ -4,35 +4,29 @@ export default function allPlayerMatches(player, players, allRecords) {
   let winnerName = " ";
   let loserName = " ";
 
-  // console.log(thisPlayerId, record.winner, record.loser)
-  // console.log(thisPlayerId == record.winner, record.loser)
-  // console.log(allRecords)
-
-
   return `
   <div class = "mt-3 allPlayerMatchesTable visually-hidden">
-    <h3>All Matches</h3>
-      <div class = "row mb-2">
-        <div class = "col-2">
+    <h3 class="text-center">All Matches</h3>
+      <div class = "row mb-2 border-bottom">
+
+        <div class = "col-3">
           <b>Winner</b>
         </div>
-        <div class = "col-1">
-        </div>
-        <div class = "col-2">
+        <div class = "col-3">
           <b>Loser</b>
         </div>
 
-        <div class = "col-1"></div>
 
         <div class = "col">
-          <b>Set 1</b>
+          <b>Set1</b>
         </div>
         <div class = "col">
-          <b>Set 2</b>
+          <b>Set2</b>
         </div>
         <div class = "col">
-          <b>Set 3</b>
+          <b>Set3</b>
         </div>
+        
       </div>
 
     ${allRecords.map((record) => {
@@ -44,19 +38,20 @@ export default function allPlayerMatches(player, players, allRecords) {
               loserName = onePlayer.name;
             }
           });
+          let set3 = record.match.slice(4,6).join("-");
+          if(set3 == "0-0"){
+            set3 = "";
+          };
           return`
-            <div class = "row">
-              <div class = "col-2">
-                ${winnerName}
+            <div class = "row mb-2 mt-2 border-bottom singleMatchRow">
+
+              <div class = "col-3">
+                <p class="fw-semibold">${winnerName}</p>
               </div>
-              <div class = "col-1">
-                
-              </div>
-              <div class = "col-2">
-                ${loserName}
+              <div class = "col-3 border-end">
+                <p class="fw-light">${loserName}</p>
               </div>
 
-              <div class = "col-1"></div>
 
               <div class = "col">
                 ${record.match.slice(0,2).join("-")}
@@ -65,7 +60,7 @@ export default function allPlayerMatches(player, players, allRecords) {
                 ${record.match.slice(2,4).join("-")}
               </div>
               <div class = "col">
-                  ${record.match.slice(4,6).join("-")}              
+                  ${set3}              
               </div>
             </div>
           `

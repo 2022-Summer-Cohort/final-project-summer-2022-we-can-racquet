@@ -3,11 +3,11 @@ export default function allPlayersInLeague(player, players) {
   let playerName = player.name;
 
   return `
-    <div class="mt-3 allPlayersInLeagueTable visually-hidden">
+    <div class="mt-3 allPlayersInLeagueTable visually-hidden ">
 
-      <h3>All players in ${leagueToMatch} League</h3>
+      <h3 class="text-center">All players in <span class="profileLeagueTableText">${leagueToMatch}</span> League</h3>
 
-        <div class="row mb-2">
+        <div class="row mb-2 border-bottom">
             <div class="col">
                 <b>Player</b>
             </div>
@@ -21,11 +21,10 @@ export default function allPlayersInLeague(player, players) {
             return `
                 <div class = "singlePlayerInLeagueRow">
 
-                  <div class = "row mb-2">
-
-                    <div class = "col mb-1">
-                      <p class = "challengedName">${player.name}</p>
-                      
+                  <div class = "row mb-4">
+                  
+                    <div class = "col-5 mb-1">
+                      ${player.name}
                     </div>
 
                     <div class = "col">

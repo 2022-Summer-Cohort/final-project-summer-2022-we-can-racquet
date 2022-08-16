@@ -5,9 +5,12 @@ import allPlayersInLeague from "./allPlayersInLeague.js";
 import allPlayerMatches from "./allPlayerMatches.js";
 import allPlayerChallenges from "./allPlayerChallenges.js";
 import guestView from "./guestView.js";
+import navbarAllChallenges from "./allChallenges.js";
+import navbarAllMatches from "./allMatches.js";
 
 const container = document.querySelector(".container");
 
+// Sends PLAYERS to makeLoginPageFromJSON
 function makeHomeView() {
       fetch("http://localhost:8080/api/player")
             .then(res => res.json())
@@ -16,12 +19,12 @@ function makeHomeView() {
             })
 }
 
+// Populates PLAYERS on Login page
 function makeLoginPageFromJSON(players) {
 
       container.innerHTML = login(players);
 
       // SUBMIT BUTTON (select existing player)
-      // get button div 
       const submitBtn = container.querySelector(".submitBtn");
 
       submitBtn.addEventListener("click", () => {
@@ -29,16 +32,24 @@ function makeLoginPageFromJSON(players) {
             fetch(`http://localhost:8080/api/player/${selectedPlayer.value}`)
                   .then(res => res.json())
                   .then(onePlayer => {
-                        makeHomePageFromSelectedPlayer(onePlayer, players);
+
+                        if (onePlayer.name === undefined) {
+                              // alert("Select a valid player!")
+                              console.log("Select a valid player!")
+                        } else {
+                              makeHomePageFromSelectedPlayer(onePlayer, players);
+                        }
+
                   })
       })
 
       // NEW PLAYER BUTTON (create new player)
       const newPlayerBtn = container.querySelector(".newPlayerBtn");
-
       const newPlayerName = container.querySelector("#player-name");
       const newPlayerEmail = container.querySelector("#player-email");
       const newPlayerPhoneNumber = container.querySelector("#player-phoneNumber");
+      let randomNumber = Math.floor(Math.random() * 31)
+      let imgUrl = "./img/avatars/";
 
       newPlayerBtn.addEventListener("click", () => {
             const newPlayerJson = {
@@ -46,16 +57,32 @@ function makeLoginPageFromJSON(players) {
                   "email": newPlayerEmail.value,
                   "phoneNumber": newPlayerPhoneNumber.value,
                   "league": "3.0",
-                  "imgUrl": "www.yeah.com",
+                  "avatarUrl": imgUrl.concat(randomNumber, ".jpg"),
+            }
+            if (!newPlayerJson.name == "" && !newPlayerJson.email == "" && !newPlayerJson.phoneNumber == "") {
+                  fetch(`http://localhost:8080/api/player`, {
+                              method: 'POST',
+                              headers: {
+                                    'Content-type': 'application/json'
+                              },
+                              body: JSON.stringify(newPlayerJson)
+                        })
+                        .then(res => res.json())
+                        .then(newPlayer => {
+                              console.log(newPlayerJson.name, "created!")
+                              makeHomeView();
+                        })
+            } else {
+                  console.log("Fill out all the fields please!")
             }
             console.log(newPlayerJson);
             fetch(`http://localhost:8080/api/player`, {
-                  method: 'POST',
-                  headers: {
-                        'Content-type': 'application/json'
-                  },
-                  body: JSON.stringify(newPlayerJson)
-            })
+                        method: 'POST',
+                        headers: {
+                              'Content-type': 'application/json'
+                        },
+                        body: JSON.stringify(newPlayerJson)
+                  })
                   .then(res => res.json())
                   .then(newPlayer => {
                         makeHomeView();
@@ -73,9 +100,9 @@ function makeGuestViewFromSelectedPlayer(playerId, players, allChallenges, allRe
             const guestChallengeName = oneGuestChallenge.querySelector(".challengesNameGuest");
             const guestChallengeId = oneGuestChallenge.querySelector(".hiddenChallengerGuestId").value;
             guestChallengeName.addEventListener("click", () => {
-                  makeGuestViewFromSelectedPlayer(guestChallengeId,players,allChallenges,allRecords);
+                  makeGuestViewFromSelectedPlayer(guestChallengeId, players, allChallenges, allRecords);
             });
-      }) 
+      })
 
       const allGuestRecords = container.querySelectorAll(".allRecordsInGuest");
       allGuestRecords.forEach((oneGuestRecord) => {
@@ -85,11 +112,11 @@ function makeGuestViewFromSelectedPlayer(playerId, players, allChallenges, allRe
             const guestRecordLoserId = oneGuestRecord.querySelector(".hiddenLoserId").value;
 
             guestRecordWinnerName.addEventListener("click", () => {
-                  makeGuestViewFromSelectedPlayer(guestRecordWinnerId,players,allChallenges,allRecords);
+                  makeGuestViewFromSelectedPlayer(guestRecordWinnerId, players, allChallenges, allRecords);
             });
 
             guestRecordLoserName.addEventListener("click", () => {
-                  makeGuestViewFromSelectedPlayer(guestRecordLoserId,players,allChallenges,allRecords);
+                  makeGuestViewFromSelectedPlayer(guestRecordLoserId, players, allChallenges, allRecords);
             });
 
       })
@@ -100,12 +127,11 @@ function makeGuestViewFromSelectedPlayer(playerId, players, allChallenges, allRe
             makeHomeView();
       });
 }
+
 function makeHomePageFromSelectedPlayer(player, players) {
 
-      // BASE LAYOUT
       container.innerHTML = header();
       container.innerHTML += home(player);
-      // Populate matching league players table
       container.innerHTML += allPlayersInLeague(player, players);
 
       // CHALLENGE NOTIFICATION
@@ -167,8 +193,8 @@ function makeHomePageFromSelectedPlayer(player, players) {
 
                         declineChallengeBtn.addEventListener("click", () => {
                               fetch(`http://localhost:8080/api/${challengeId.value}/deleteChallenge`, {
-                                    method: 'DELETE'
-                              })
+                                          method: 'DELETE'
+                                    })
                                     .then(res => res.json())
                                     .then((newPlayers) => {
                                           makeHomePageFromSelectedPlayer(player, newPlayers);
@@ -182,8 +208,6 @@ function makeHomePageFromSelectedPlayer(player, players) {
                         //       // container.innerHTML += acceptChallenge(challengerId, players);
                         // })
                   })
-
-
 
                   allPlayersInLeagueRows.forEach((singlePlayerInLeagueRow) => {
                         const challengeBtn = singlePlayerInLeagueRow.querySelector(".challengeBtn");
@@ -216,22 +240,43 @@ function makeHomePageFromSelectedPlayer(player, players) {
                               const set31 = singlePlayerInLeagueRow.querySelector(".select6").value;
 
                               const newMatch = [set10, set11, set20, set21, set30, set31];
-                              // console.log(challengerId, challengedId, newMatch);
 
+                              // FOR CONSOLE.LOG
+                              let winner, loser = "";
+                              // get player names
+                              players.forEach((player) => {
+                                    if (player.id == challengerId) {
+                                          winner = player.name;
+                                    }
+                                    if (player.id == challengedId) {
+                                          loser = player.name;
+                                    }
+                              });
+                              // console.log("Winner:", challengerId, "Loser:", challengedId);
+                              console.log("Winner:", winner, "Loser:", loser);
+                              const set1 = [set10, "-", set11];
+                              const set2 = [set20, "-", set21];
+                              const set3 = [set30, "-", set31];
+                              console.log(
+                                    "Set1:",
+                                    set1.join(""),
+                                    ", Set2:",
+                                    set2.join(""),
+                                    ", Set3:",
+                                    set3.join("")
+                              );
                               const newRecordJSON = {
                                     winner: challengerId,
                                     loser: challengedId,
                                     match: newMatch,
                               };
-                              fetch(
-                                    `http://localhost:8080/api/player/${challengerId}/record/${challengedId}`, {
-                                    method: "POST",
-                                    headers: {
-                                          "Content-type": "application/json",
-                                    },
-                                    body: JSON.stringify(newMatch),
-                              }
-                              )
+                              fetch(`http://localhost:8080/api/player/${challengerId}/record/${challengedId}`, {
+                                          method: "POST",
+                                          headers: {
+                                                "Content-type": "application/json",
+                                          },
+                                          body: JSON.stringify(newMatch),
+                                    })
                                     .then((res) => res.json())
                                     .then((newPlayers) => {
                                           newPlayers.forEach((newPlayer) => {
@@ -249,14 +294,14 @@ function makeHomePageFromSelectedPlayer(player, players) {
                                     challengedId: challengedId,
                               };
                               fetch(
-                                    `http://localhost:8080/api/player/${challengerId}/challenge/${challengedId}`, {
-                                    method: "POST",
-                                    headers: {
-                                          "Content-type": "application/json",
-                                    },
-                                    body: JSON.stringify(newChallengeJson),
-                              }
-                              )
+                                          `http://localhost:8080/api/player/${challengerId}/challenge/${challengedId}`, {
+                                                method: "POST",
+                                                headers: {
+                                                      "Content-type": "application/json",
+                                                },
+                                                body: JSON.stringify(newChallengeJson),
+                                          }
+                                    )
                                     .then((res) => res.json())
                                     .then((newChallenge) => {
                                           players.forEach((player) => {
@@ -267,14 +312,67 @@ function makeHomePageFromSelectedPlayer(player, players) {
                                     });
                         });
 
-
-
                   });
+
                   // NAVBAR HOME BUTTON
                   const homeBtn = container.querySelector(".home-navigation");
                   homeBtn.addEventListener("click", () => {
                         makeHomeView();
                   });
+                  // NAVBAR CHALLENGES BUTTON
+                  const navbarChallengesBtn = container.querySelector(".challenge-navigation");
+                  navbarChallengesBtn.addEventListener("click", () => {
+                        console.log("challenge")
+                        makeChallengesView(players, allChallenges);
+                  });
+                  // NAVBAR MATCHES BUTTON
+                  const navbarRecordsBtn = container.querySelector(".records-navigation");
+                  navbarRecordsBtn.addEventListener("click", () => {
+                        makeRecordsView();
+                  });
+
+
+                  // NOT USED?
+                  function makeChallengesView() {
+
+                        container.innerHTML = header();
+                        container.innerHTML += navbarAllChallenges(players, allChallenges);
+                        console.log('top')
+
+                        // NAVBAR HOME BUTTON
+                        const homeBtn = container.querySelector(".home-navigation");
+                        homeBtn.addEventListener("click", () => {
+                              makeHomeView();
+                        });
+                        // NAVBAR MATCHES BUTTON
+                        const navbarRecordsBtn = container.querySelector(".records-navigation");
+                        navbarRecordsBtn.addEventListener("click", () => {
+                              makeRecordsView();
+                        });
+
+                  }
+
+                  function makeRecordsView() {
+                        container.innerHTML = header();
+                        container.innerHTML += navbarAllMatches(players);
+                        console.log('top')
+
+                        // NAVBAR HOME BUTTON
+                        const homeBtn = container.querySelector(".home-navigation");
+                        homeBtn.addEventListener("click", () => {
+                              makeHomeView();
+                        });
+                        // NAVBAR CHALLENGES BUTTON
+                        const navbarChallengesBtn = container.querySelector(".challenge-navigation");
+                        navbarChallengesBtn.addEventListener("click", () => {
+                              console.log("challenge")
+                              makeChallengesView(players, allChallenges);
+                        });
+                  }
+
+
+
+
             });
 
 
@@ -345,8 +443,8 @@ function makeHomePageFromSelectedPlayer(player, players) {
 
                         declineChallengeBtn.addEventListener("click", () => {
                               fetch(`http://localhost:8080/api/${challengeId.value}/deleteChallenge`, {
-                                    method: 'DELETE'
-                              })
+                                          method: 'DELETE'
+                                    })
                                     .then(res => res.json())
                                     .then((newPlayers) => {
                                           makeHomePageFromSelectedPlayer(player, newPlayers);
@@ -391,7 +489,31 @@ function makeHomePageFromSelectedPlayer(player, players) {
                               const set31 = singlePlayerInLeagueRow.querySelector(".select6").value;
 
                               const newMatch = [set10, set11, set20, set21, set30, set31];
-                              // console.log(challengerId, challengedId, newMatch);
+
+                              // FOR CONSOLE.LOG
+                              let winner, loser = "";
+                              // get player names
+                              players.forEach((player) => {
+                                    if (player.id == challengerId) {
+                                          winner = player.name;
+                                    }
+                                    if (player.id == challengedId) {
+                                          loser = player.name;
+                                    }
+                              });
+                              // console.log("Winner:", challengerId, "Loser:", challengedId);
+                              console.log("Winner:", winner, "Loser:", loser);
+                              const set1 = [set10, "-", set11];
+                              const set2 = [set20, "-", set21];
+                              const set3 = [set30, "-", set31];
+                              console.log(
+                                    "Set1:",
+                                    set1.join(""),
+                                    ", Set2:",
+                                    set2.join(""),
+                                    ", Set3:",
+                                    set3.join("")
+                              );
 
                               const newRecordJSON = {
                                     winner: challengerId,
@@ -399,14 +521,14 @@ function makeHomePageFromSelectedPlayer(player, players) {
                                     match: newMatch,
                               };
                               fetch(
-                                    `http://localhost:8080/api/player/${challengerId}/record/${challengedId}`, {
-                                    method: "POST",
-                                    headers: {
-                                          "Content-type": "application/json",
-                                    },
-                                    body: JSON.stringify(newMatch),
-                              }
-                              )
+                                          `http://localhost:8080/api/player/${challengerId}/record/${challengedId}`, {
+                                                method: "POST",
+                                                headers: {
+                                                      "Content-type": "application/json",
+                                                },
+                                                body: JSON.stringify(newMatch),
+                                          }
+                                    )
                                     .then((res) => res.json())
                                     .then((newPlayers) => {
                                           newPlayers.forEach((newPlayer) => {
@@ -424,14 +546,14 @@ function makeHomePageFromSelectedPlayer(player, players) {
                                     challengedId: challengedId,
                               };
                               fetch(
-                                    `http://localhost:8080/api/player/${challengerId}/challenge/${challengedId}`, {
-                                    method: "POST",
-                                    headers: {
-                                          "Content-type": "application/json",
-                                    },
-                                    body: JSON.stringify(newChallengeJson),
-                              }
-                              )
+                                          `http://localhost:8080/api/player/${challengerId}/challenge/${challengedId}`, {
+                                                method: "POST",
+                                                headers: {
+                                                      "Content-type": "application/json",
+                                                },
+                                                body: JSON.stringify(newChallengeJson),
+                                          }
+                                    )
                                     .then((res) => res.json())
                                     .then((newChallenge) => {
                                           players.forEach((player) => {
@@ -445,11 +567,66 @@ function makeHomePageFromSelectedPlayer(player, players) {
 
 
                   });
+
+
                   // NAVBAR HOME BUTTON
                   const homeBtn = container.querySelector(".home-navigation");
                   homeBtn.addEventListener("click", () => {
                         makeHomeView();
                   });
+                  // NAVBAR CHALLENGES BUTTON
+                  const navbarChallengesBtn = container.querySelector(".challenge-navigation");
+                  navbarChallengesBtn.addEventListener("click", () => {
+                        makeChallengesView();
+                  });
+                  // NAVBAR MATCHES BUTTON
+                  const navbarRecordsBtn = container.querySelector(".records-navigation");
+                  navbarRecordsBtn.addEventListener("click", () => {
+                        makeRecordsView();
+                  });
+
+                  function makeChallengesView() {
+
+                        container.innerHTML = header();
+
+                        fetch(`http://localhost:8080/api/challenge`)
+                              .then((res) => res.json())
+                              .then((allChallenges) => {
+                                    container.innerHTML += navbarAllChallenges(players, allChallenges);
+                                    console.log("bot")
+
+                                    // NAVBAR HOME BUTTON
+                                    const homeBtn = container.querySelector(".home-navigation");
+                                    homeBtn.addEventListener("click", () => {
+                                          makeHomeView();
+                                    });
+                                    // NAVBAR MATCHES BUTTON
+                                    const navbarRecordsBtn = container.querySelector(".records-navigation");
+                                    navbarRecordsBtn.addEventListener("click", () => {
+                                          makeRecordsView();
+                                    });
+                              });
+
+                  }
+
+                  function makeRecordsView() {
+
+                        container.innerHTML = header();
+                        container.innerHTML += navbarAllMatches(players, allRecords);
+                        console.log('bot')
+
+                        // NAVBAR HOME BUTTON
+                        const homeBtn = container.querySelector(".home-navigation");
+                        homeBtn.addEventListener("click", () => {
+                              makeHomeView();
+                        });
+                        // NAVBAR CHALLENGES BUTTON
+                        const navbarChallengesBtn = container.querySelector(".challenge-navigation");
+                        navbarChallengesBtn.addEventListener("click", () => {
+                              makeChallengesView();
+                        });
+                  }
+
             });
 }
 makeHomeView();

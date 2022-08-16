@@ -47,7 +47,7 @@ function makeLoginPageFromJSON(players) {
       const newPlayerName = container.querySelector("#player-name");
       const newPlayerEmail = container.querySelector("#player-email");
       const newPlayerPhoneNumber = container.querySelector("#player-phoneNumber");
-      let randomNumber = Math.floor(Math.random() * 21)
+      let randomNumber = Math.floor(Math.random() * 31)
       let imgUrl = "./img/avatars/";
 
       newPlayerBtn.addEventListener("click", () => {

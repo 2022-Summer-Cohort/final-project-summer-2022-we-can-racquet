@@ -67,6 +67,33 @@ function makeGuestViewFromSelectedPlayer(playerId, players, allChallenges, allRe
       container.innerHTML = header();
       container.innerHTML += guestView(playerId, players, allChallenges, allRecords);
 
+
+      const allGuestChalleneges = container.querySelectorAll(".allChallengesInGuest");
+      allGuestChalleneges.forEach((oneGuestChallenge) => {
+            const guestChallengeName = oneGuestChallenge.querySelector(".challengesNameGuest");
+            const guestChallengeId = oneGuestChallenge.querySelector(".hiddenChallengerGuestId").value;
+            guestChallengeName.addEventListener("click", () => {
+                  makeGuestViewFromSelectedPlayer(guestChallengeId,players,allChallenges,allRecords);
+            });
+      }) 
+
+      const allGuestRecords = container.querySelectorAll(".allRecordsInGuest");
+      allGuestRecords.forEach((oneGuestRecord) => {
+            const guestRecordWinnerName = oneGuestRecord.querySelector(".recordWinnerName");
+            const guestRecordLoserName = oneGuestRecord.querySelector(".recordLoserName");
+            const guestRecordWinnerId = oneGuestRecord.querySelector(".hiddenWinnerId").value;
+            const guestRecordLoserId = oneGuestRecord.querySelector(".hiddenLoserId").value;
+
+            guestRecordWinnerName.addEventListener("click", () => {
+                  makeGuestViewFromSelectedPlayer(guestRecordWinnerId,players,allChallenges,allRecords);
+            });
+
+            guestRecordLoserName.addEventListener("click", () => {
+                  makeGuestViewFromSelectedPlayer(guestRecordLoserId,players,allChallenges,allRecords);
+            });
+
+      })
+
       // NAVBAR HOME BUTTON
       const homeBtn = container.querySelector(".home-navigation");
       homeBtn.addEventListener("click", () => {

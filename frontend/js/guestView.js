@@ -27,6 +27,13 @@ export default function guestView(guestPlayerId, players, allChallenges,allRecor
                         <h6 class = "profileLeagueTextGuest"> ${player.league}</h6>
                         <img class="logoRounded mx-auto d-block" src="${player.avatarUrl}" alt="player avatar">
                
+    
+                        <div class="row text-center mt-4">
+                            <div class="col">
+                                <h1 class = "display-2"> ${player.name}</h1>
+                            </div> 
+                        </div>
+
                         <div class="row mt-1 text-center">
                             <div class="col">
                                 <p>${player.email}</p>
@@ -56,7 +63,7 @@ export default function guestView(guestPlayerId, players, allChallenges,allRecor
                         })
                         return `
                             <div class = "allChallengesInGuest">
-                                <p class ="challengesNameGuest">${tempChallengerName}</p> 
+                                <a href="#" class ="challengesNameGuest">${tempChallengerName}</a> 
                                 <input type="hidden" class="hiddenChallengerGuestId" value="${tempChallengerId}">
                             </div>
                         `
@@ -106,19 +113,21 @@ export default function guestView(guestPlayerId, players, allChallenges,allRecor
                             <div class = "allRecordsInGuest">
                                 <div class="row">
                                     <div class="col-2">
-                                    <p class = "recordWinnerName">${tempWinnerName}</p>
-                                    <input type="hidden" class="hiddenWinnerId" value="${tempWinnerId}">
+                                        <a href="#" class = "recordWinnerName">${tempWinnerName}</a>
+                                        <input type="hidden" class="hiddenWinnerId" value="${tempWinnerId}">
                                     </div>
-                                    <div class="col-1">
-                                    </div>
+
+                                    <div class="col-1"></div>
+
                                     <div class="col-2">
-                                    <p class = "recordLoserName">${tempLoserName}</p>
-                                    <input type="hidden" class="hiddenLoserId" value="${tempLoserId}">
+                                        <a href="#" class = "recordLoserName">${tempLoserName}</a>
+                                        <input type="hidden" class="hiddenLoserId" value="${tempLoserId}">
                                     </div>
-                                    <div class="col-1">
-                                    </div>
+
+                                    <div class="col-1"></div>
+
                                     <div class = "col">
-                                    ${record.match.slice(0,2).join("-")}
+                                       ${record.match.slice(0,2).join("-")}
                                     </div>
                                     <div class = "col">
                                         ${record.match.slice(2,4).join("-")}
@@ -126,6 +135,7 @@ export default function guestView(guestPlayerId, players, allChallenges,allRecor
                                     <div class = "col">
                                         ${record.match.slice(4,6).join("-")}              
                                     </div>
+                                    
                                 </div>
                             </div>
                         `

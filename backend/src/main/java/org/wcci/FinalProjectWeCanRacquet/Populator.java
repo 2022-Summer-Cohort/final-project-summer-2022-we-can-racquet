@@ -104,7 +104,7 @@ public class Populator implements CommandLineRunner {
         Challenge challenge9 = new Challenge(6L, 7L);
         Challenge challenge10 = new Challenge(8L, 9L);
         Challenge challenge11 = new Challenge(9L, 8L);
-        Challenge challenge12 = new Challenge(9L, 8L);
+        Challenge challenge12 = new Challenge(13L, 12L);
         Challenge challenge13 = new Challenge(10L, 9L);
         Challenge challenge14 = new Challenge(2L, 1L);
         Challenge challenge15 = new Challenge(3L, 1L);

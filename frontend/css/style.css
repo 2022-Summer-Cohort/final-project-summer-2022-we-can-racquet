@@ -32,7 +32,7 @@
   filter: drop-shadow(5px 5px 5px #222222);
 }
 
-h1, h2, h3, h4, h5, h6, p {
+h1, h2, h3, h4, h5, h6, p, a {
   font-family: 'Roboto', sans-serif;
 }
 
@@ -103,4 +103,11 @@ h1, h2, h3, h4, h5, h6, p {
   opacity: .9;
   margin-top: 5px;
 
+}
+
+a{
+  margin: auto;
+  padding: auto;
+  text-decoration: none;
+  color:#222222;
 }

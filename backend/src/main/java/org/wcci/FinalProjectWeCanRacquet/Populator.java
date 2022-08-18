@@ -43,9 +43,9 @@ public class Populator implements CommandLineRunner {
         Player player9 = new Player("Abdulrizaq Ali", "3.5", "./img/avatars/5.jpg", "abdulali@gmail.com", "155-511-5555");
         Player player10 = new Player("Jordan Gilpin", "3.5", "./img/avatars/15.jpg", "JG@gmail.com", "123-444-5647");
 
-        Player player11 = new Player("Alex Stein", "3.5", "./img/avatars/28.jpg", "steiner@gmail.com", "123-444-5647");
-        Player player12 = new Player("Alex Nathans", "3.5", "./img/avatars/27.jpg", "pizzaHands@gmail.com", "123-444-5647");
-        Player player13 = new Player("Chelsea Jo Calo", "3.5", "./img/avatars/26.jpg", "Jojojojo@gmail.com", "123-444-5647");
+        Player player11 = new Player("Alex Stein", "3.0", "./img/avatars/28.jpg", "steiner@gmail.com", "123-444-5647");
+        Player player12 = new Player("Alex Nathans", "3.0", "./img/avatars/27.jpg", "pizzaHands@gmail.com", "123-444-5647");
+        Player player13 = new Player("Chelsea Jo Calo", "3.0", "./img/avatars/26.jpg", "Jojojojo@gmail.com", "123-444-5647");
 
         playerRepo.save(player1);
         playerRepo.save(player2);
@@ -99,7 +99,7 @@ public class Populator implements CommandLineRunner {
         Challenge challenge4 = new Challenge(2L, 3L);
         Challenge challenge5 = new Challenge(3L, 1L);
         Challenge challenge6 = new Challenge(5L, 6L);
-        Challenge challenge7 = new Challenge(5L, 6L);
+        Challenge challenge7 = new Challenge(5L, 13L);
         Challenge challenge8 = new Challenge(6L, 5L);
         Challenge challenge9 = new Challenge(6L, 7L);
         Challenge challenge10 = new Challenge(8L, 9L);
@@ -111,7 +111,13 @@ public class Populator implements CommandLineRunner {
         Challenge challenge16 = new Challenge(4L, 1L);
         Challenge challenge17 = new Challenge(1L, 4L);
         Challenge challenge18 = new Challenge(3L, 2L);
-        Challenge challenge19 = new Challenge(4L, 2L);
+        Challenge challenge19 = new Challenge(6L, 2L);
+        Challenge challenge20 = new Challenge(13L, 12L);
+        Challenge challenge21 = new Challenge(13L, 11L);
+        Challenge challenge22 = new Challenge(12L, 13L);
+        Challenge challenge23 = new Challenge(11L, 12L);
+        Challenge challenge24 = new Challenge(11L, 13L);
+        Challenge challenge25 = new Challenge(9L, 6L);
         challengeRepo.save(challenge1);
         challengeRepo.save(challenge2);
         challengeRepo.save(challenge3);
@@ -131,6 +137,12 @@ public class Populator implements CommandLineRunner {
         challengeRepo.save(challenge17);
         challengeRepo.save(challenge18);
         challengeRepo.save(challenge19);
+        challengeRepo.save(challenge20);
+        challengeRepo.save(challenge21);
+        challengeRepo.save(challenge22);
+        challengeRepo.save(challenge23);
+        challengeRepo.save(challenge24);
+        challengeRepo.save(challenge25);
 
 
 

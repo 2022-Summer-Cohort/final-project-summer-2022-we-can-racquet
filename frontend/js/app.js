@@ -75,18 +75,18 @@ function makeLoginPageFromJSON(players) {
             } else {
                   console.log("Fill out all the fields please!")
             }
-            console.log(newPlayerJson);
-            fetch(`http://localhost:8080/api/player`, {
-                        method: 'POST',
-                        headers: {
-                              'Content-type': 'application/json'
-                        },
-                        body: JSON.stringify(newPlayerJson)
-                  })
-                  .then(res => res.json())
-                  .then(newPlayer => {
-                        makeHomeView();
-                  })
+            // console.log(newPlayerJson);
+            // fetch(`http://localhost:8080/api/player`, {
+            //             method: 'POST',
+            //             headers: {
+            //                   'Content-type': 'application/json'
+            //             },
+            //             body: JSON.stringify(newPlayerJson)
+            //       })
+            //       .then(res => res.json())
+            //       .then(newPlayer => {
+            //             makeHomeView();
+            //       })
       })
 }
 

@@ -163,7 +163,7 @@ function makeGuestViewFromSelectedPlayer(playerId, players, allChallenges, allRe
 
             container.innerHTML = header();
             container.innerHTML += navbarAllMatches(players, allRecords);
-            console.log('bot')
+            // console.log('bot')
 
             // NAVBAR HOME BUTTON
             const homeBtn = container.querySelector(".home-navigation");
@@ -646,7 +646,7 @@ function makeHomePageFromSelectedPlayer(player, players) {
                               .then((res) => res.json())
                               .then((allChallenges) => {
                                     container.innerHTML += navbarAllChallenges(players, allChallenges);
-                                    console.log("bot")
+                                    // console.log("bot")
 
                                     // NAVBAR HOME BUTTON
                                     const homeBtn = container.querySelector(".home-navigation");
@@ -666,7 +666,7 @@ function makeHomePageFromSelectedPlayer(player, players) {
 
                         container.innerHTML = header();
                         container.innerHTML += navbarAllMatches(players, allRecords);
-                        console.log('bot')
+                        // console.log('bot')
 
                         // NAVBAR HOME BUTTON
                         const homeBtn = container.querySelector(".home-navigation");

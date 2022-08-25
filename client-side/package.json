@@ -1,0 +1,29 @@
+{
+  "name": "final-project-summer-2022-we-can-racquet",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
+    "test": "jest --watchAll"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/2022-Summer-Cohort/final-project-summer-2022-we-can-racquet.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/2022-Summer-Cohort/final-project-summer-2022-we-can-racquet/issues"
+  },
+  "homepage": "https://github.com/2022-Summer-Cohort/final-project-summer-2022-we-can-racquet#readme",
+  "devDependencies": {
+    "@babel/core": "^7.18.13",
+    "@babel/preset-env": "^7.18.10",
+    "babel-jest": "^29.0.0",
+    "jest": "^29.0.0",
+    "parcel": "^2.7.0"
+  }
+}

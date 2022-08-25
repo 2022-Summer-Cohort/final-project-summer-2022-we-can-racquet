@@ -12,7 +12,7 @@ const container = document.querySelector(".container");
 
 // Sends PLAYERS to makeLoginPageFromJSON
 function makeHomeView() {
-      fetch("http://localhost:8080/api/player")
+      fetch("/api/player")
             .then(res => res.json())
             .then(players => {
                   makeLoginPageFromJSON(players);
@@ -29,7 +29,7 @@ function makeLoginPageFromJSON(players) {
 
       submitBtn.addEventListener("click", () => {
             const selectedPlayer = container.querySelector(".playerNameSelected");
-            fetch(`http://localhost:8080/api/player/${selectedPlayer.value}`)
+            fetch(`/api/player/${selectedPlayer.value}`)
                   .then(res => res.json())
                   .then(onePlayer => {
 
@@ -61,7 +61,7 @@ function makeLoginPageFromJSON(players) {
                   "avatarUrl": imgUrl.concat(randomNumber, ".jpg"),
             }
             if (!newPlayerJson.name == "" && !newPlayerJson.email == "" && !newPlayerJson.phoneNumber == "") {
-                  fetch(`http://localhost:8080/api/player`, {
+                  fetch(`/api/player`, {
                               method: 'POST',
                               headers: {
                                     'Content-type': 'application/json'
@@ -77,7 +77,7 @@ function makeLoginPageFromJSON(players) {
                   console.log("Fill out all the fields please!")
             }
             // console.log(newPlayerJson);
-            // fetch(`http://localhost:8080/api/player`, {
+            // fetch(`/api/player`, {
             //             method: 'POST',
             //             headers: {
             //                   'Content-type': 'application/json'
@@ -141,7 +141,7 @@ function makeGuestViewFromSelectedPlayer(playerId, players, allChallenges, allRe
 
             container.innerHTML = header();
 
-            fetch(`http://localhost:8080/api/challenge`)
+            fetch(`/api/challenge`)
                   .then((res) => res.json())
                   .then((allChallenges) => {
                         container.innerHTML += navbarAllChallenges(players, allChallenges);
@@ -189,7 +189,7 @@ function makeHomePageFromSelectedPlayer(player, players) {
       container.innerHTML += allPlayersInLeague(player, players);
 
       // CHALLENGE NOTIFICATION
-      fetch(`http://localhost:8080/api/challenge`)
+      fetch(`/api/challenge`)
             .then((res) => res.json())
             .then((allChallenges) => {
                   container.innerHTML += allPlayerChallenges(player, players, allChallenges);
@@ -246,7 +246,7 @@ function makeHomePageFromSelectedPlayer(player, players) {
                         // const acceptChallengeBtn = challengeRow.querySelector(".acceptChallengeBtn");
 
                         declineChallengeBtn.addEventListener("click", () => {
-                              fetch(`http://localhost:8080/api/${challengeId.value}/deleteChallenge`, {
+                              fetch(`/api/${challengeId.value}/deleteChallenge`, {
                                           method: 'DELETE'
                                     })
                                     .then(res => res.json())
@@ -274,7 +274,7 @@ function makeHomePageFromSelectedPlayer(player, players) {
                         const challengedName = singlePlayerInLeagueRow.querySelector(".challengedName");
 
                         challengedName.addEventListener("click", () => {
-                              fetch(`http://localhost:8080/api/record`)
+                              fetch(`/api/record`)
                                     .then((res) => res.json())
                                     .then((allRecordsTemp) => {
                                           makeGuestViewFromSelectedPlayer(challengedId, players, allChallenges, allRecordsTemp);
@@ -324,7 +324,7 @@ function makeHomePageFromSelectedPlayer(player, players) {
                                     loser: challengedId,
                                     match: newMatch,
                               };
-                              fetch(`http://localhost:8080/api/player/${challengerId}/record/${challengedId}`, {
+                              fetch(`/api/player/${challengerId}/record/${challengedId}`, {
                                           method: "POST",
                                           headers: {
                                                 "Content-type": "application/json",
@@ -348,7 +348,7 @@ function makeHomePageFromSelectedPlayer(player, players) {
                                     challengedId: challengedId,
                               };
                               fetch(
-                                          `http://localhost:8080/api/player/${challengerId}/challenge/${challengedId}`, {
+                                          `/api/player/${challengerId}/challenge/${challengedId}`, {
                                                 method: "POST",
                                                 headers: {
                                                       "Content-type": "application/json",
@@ -432,7 +432,7 @@ function makeHomePageFromSelectedPlayer(player, players) {
 
       ////////////////////////////////////////////////////////////////////////////////     
 
-      fetch(`http://localhost:8080/api/record`)
+      fetch(`/api/record`)
             .then((res) => res.json())
             .then((allRecords) => {
                   // console.log(allRecords);
@@ -496,7 +496,7 @@ function makeHomePageFromSelectedPlayer(player, players) {
                         // const acceptChallengeBtn = challengeRow.querySelector(".acceptChallengeBtn");
 
                         declineChallengeBtn.addEventListener("click", () => {
-                              fetch(`http://localhost:8080/api/${challengeId.value}/deleteChallenge`, {
+                              fetch(`/api/${challengeId.value}/deleteChallenge`, {
                                           method: 'DELETE'
                                     })
                                     .then(res => res.json())
@@ -524,7 +524,7 @@ function makeHomePageFromSelectedPlayer(player, players) {
                         const challengedName = singlePlayerInLeagueRow.querySelector(".challengedName");
 
                         challengedName.addEventListener("click", () => {
-                              fetch(`http://localhost:8080/api/challenge`)
+                              fetch(`/api/challenge`)
                                     .then((res) => res.json())
                                     .then((allChallengeTemp) => {
                                           makeGuestViewFromSelectedPlayer(challengedId, players, allChallengeTemp, allRecords);
@@ -575,7 +575,7 @@ function makeHomePageFromSelectedPlayer(player, players) {
                                     match: newMatch,
                               };
                               fetch(
-                                          `http://localhost:8080/api/player/${challengerId}/record/${challengedId}`, {
+                                          `/api/player/${challengerId}/record/${challengedId}`, {
                                                 method: "POST",
                                                 headers: {
                                                       "Content-type": "application/json",
@@ -600,7 +600,7 @@ function makeHomePageFromSelectedPlayer(player, players) {
                                     challengedId: challengedId,
                               };
                               fetch(
-                                          `http://localhost:8080/api/player/${challengerId}/challenge/${challengedId}`, {
+                                          `/api/player/${challengerId}/challenge/${challengedId}`, {
                                                 method: "POST",
                                                 headers: {
                                                       "Content-type": "application/json",
@@ -643,7 +643,7 @@ function makeHomePageFromSelectedPlayer(player, players) {
 
                         container.innerHTML = header();
 
-                        fetch(`http://localhost:8080/api/challenge`)
+                        fetch(`/api/challenge`)
                               .then((res) => res.json())
                               .then((allChallenges) => {
                                     container.innerHTML += navbarAllChallenges(players, allChallenges);

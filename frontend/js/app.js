@@ -37,6 +37,7 @@ function makeLoginPageFromJSON(players) {
                               // alert("Select a valid player!")
                               console.log("Select a valid player!")
                         } else {
+                              // console.log("Th")
                               makeHomePageFromSelectedPlayer(onePlayer, players);
                         }
 

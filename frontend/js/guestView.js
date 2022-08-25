@@ -111,7 +111,7 @@ export default function guestView(guestPlayerId, players, allChallenges,allRecor
                         
                         return`
                             <div class = "allRecordsInGuest">
-                                <div class="row">
+                                <div class="row mb-3">
                                     <div class="col-2">
                                         <a href="#" class = "recordWinnerName">${tempWinnerName}</a>
                                         <input type="hidden" class="hiddenWinnerId" value="${tempWinnerId}">

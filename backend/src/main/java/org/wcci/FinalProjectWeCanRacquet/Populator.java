@@ -79,7 +79,12 @@ public class Populator implements CommandLineRunner {
         Record record8 = new Record(5L, 6L, match4);
         Record record9 = new Record(6L, 5L, match6);
         Record record10 = new Record(7L, 5L, match7);
-        Record record11 = new Record(9L, 10L, match4);
+        Record record11 = new Record(9L, 10L, match1);
+        Record record12 = new Record(3L, 12L, match2);
+        Record record13 = new Record(1L, 12L, match3);
+        Record record14 = new Record(1L, 5L, match4);
+        Record record15 = new Record(11L, 5L, match5);
+        Record record16 = new Record(7L, 5L, match7);
 
         recordRepo.save(record1);
         recordRepo.save(record2);
@@ -92,6 +97,11 @@ public class Populator implements CommandLineRunner {
         recordRepo.save(record9);
         recordRepo.save(record10);
         recordRepo.save(record11);
+        recordRepo.save(record12);
+        recordRepo.save(record13);
+        recordRepo.save(record14);
+        recordRepo.save(record15);
+        recordRepo.save(record16);
 
         Challenge challenge1 = new Challenge(1L, 2L);
         Challenge challenge2 = new Challenge(1L, 3L);
@@ -112,7 +122,7 @@ public class Populator implements CommandLineRunner {
         Challenge challenge17 = new Challenge(1L, 4L);
         Challenge challenge18 = new Challenge(3L, 2L);
         Challenge challenge19 = new Challenge(6L, 2L);
-        Challenge challenge20 = new Challenge(13L, 12L);
+        Challenge challenge20 = new Challenge(3L, 12L);
         Challenge challenge21 = new Challenge(13L, 11L);
         Challenge challenge22 = new Challenge(12L, 13L);
         Challenge challenge23 = new Challenge(11L, 12L);
